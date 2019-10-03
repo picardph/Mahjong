@@ -10,7 +10,7 @@ import Mahjong.*;
 
 public class Game {
 
-    // Array
+    // Board Array
     Tile[][][] board;
 
     public Game(String template) {
