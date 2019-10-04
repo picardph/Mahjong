@@ -20,7 +20,7 @@ public class NewMenuController {
 	}
 
 	public void startClicked(ActionEvent actionEvent) throws Exception {
-		if (list.getSelectionModel().getSelectedItem() != null && (new File((String)list.getSelectionModel().getSelectedItem())).exists()) {
+		if (list.getSelectionModel().getSelectedItem() != null && (new File("Puzzles/" + (String)list.getSelectionModel().getSelectedItem())).exists()) {
 			MahjongApplication.setLoadFile((String)list.getSelectionModel().getSelectedItem());
 			MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("BoardMenu.fxml")));
 		}
