@@ -1,8 +1,9 @@
-package Mahjong.GUI;
+package mahjong.gui;
 
-import Mahjong.Game;
+import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import mahjong.Game;
 
 public class BoardMenuController {
 
@@ -18,7 +19,8 @@ public class BoardMenuController {
 	public void initialize() {
 	}
 
-	public void onNewClicked(ActionEvent actionEvent) {
+	public void onNewClicked(ActionEvent actionEvent) throws Exception {
+		MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("NewMenu.fxml")));
 	}
 
 	public void onOpenClicked(ActionEvent actionEvent) {
