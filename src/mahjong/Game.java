@@ -2,6 +2,7 @@ package mahjong;
 
 public class Game {
 
+    // Board Array
     Tile[][][] board;
 
     public Game(String template) {
