@@ -20,9 +20,10 @@ public class NewMenuController {
 	}
 
 	public void startClicked(ActionEvent actionEvent) throws Exception {
-		if (list.getSelectionModel().getSelectedItem() != null && (new File("Puzzles/" + (String)list.getSelectionModel().getSelectedItem())).exists()) {
-			MahjongApplication.setLoadFile((String)list.getSelectionModel().getSelectedItem());
-			MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("BoardMenu.fxml")));
+		String path = "Puzzles/" + (String)list.getSelectionModel().getSelectedItem();
+		if (list.getSelectionModel().getSelectedItem() != null && (new File(path)).exists()) {
+			MahjongApplication.setLoadFile(path);
+			MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("BoardMenu.fxml")), true);
 		}
 	}
 }

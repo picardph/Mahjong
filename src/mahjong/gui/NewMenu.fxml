@@ -5,8 +5,8 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
+
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="mahjong.gui.NewMenuController"
@@ -14,8 +14,7 @@
     <padding>
         <Insets top="10" bottom="10" left="10" right="10"/>
     </padding>
-    <Label text="MAHJONG" alignment="CENTER" textAlignment="CENTER"/>
-    <Label text="Select a puzzle:" GridPane.rowIndex="1"/>
-    <ListView fx:id="list" GridPane.rowIndex="2"/>
-    <Button text="Start!" GridPane.rowIndex="3" onAction="#startClicked"/>
+    <Label text="Select a puzzle:"/>
+    <ListView fx:id="list" GridPane.rowIndex="1"/>
+    <Button text="Start!" GridPane.rowIndex="2" onAction="#startClicked"/>
 </GridPane>
