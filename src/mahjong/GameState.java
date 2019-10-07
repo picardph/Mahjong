@@ -1,4 +1,4 @@
-package Mahjong;
+package mahjong;
 
 public enum GameState {
     NoGame,

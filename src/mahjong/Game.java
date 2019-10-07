@@ -1,4 +1,4 @@
-package Mahjong;
+package mahjong;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -82,8 +82,8 @@ public class Game {
     }
 
     public Tile getTile(int x, int y, int z) {
-        if (board[x][y][z] != null)
-            return board[x][y][z];
+        /*if (board[x][y][z] != null)
+            return board[x][y][z];*/
         return null;
     }
 
@@ -122,6 +122,7 @@ public class Game {
     }
 
     public void removeTiles(Tile t1, Tile t2) {
+        /*
         int x1 = t1.getX();
         int y1 = t1.getY();
         int z1 = t1.getZ();
@@ -137,7 +138,7 @@ public class Game {
         board[x2][y2][z2] = null;
         board[x2+1][y2][z2] = null;
         board[x2][y2+1][z2] = null;
-        board[x2+1][y2+1][z2] = null;
+        board[x2+1][y2+1][z2] = null;*/
     }
 
     public void shuffle() {

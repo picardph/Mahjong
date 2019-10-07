@@ -1,4 +1,4 @@
-package Mahjong;
+package mahjong;
 
 public enum TileType {
 	// These are the names of the types of tiles in our game
