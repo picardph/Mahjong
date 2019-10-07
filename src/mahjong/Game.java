@@ -17,7 +17,7 @@ public class Game {
 
     }
 
-    private Tile getTile(int x, int y, int z) {
+    public Tile getTile(int x, int y, int z) {
         if (board[x][y][z] != null)
             return board[x][y][z];
         return null;
@@ -90,5 +90,55 @@ public class Game {
 
     public GameState getGameState() {
         return null;
+    }
+
+    public TileClass getTileClass(TileType type) {
+        switch (type) {
+            case Ch1:
+            case Ch2:
+            case Ch3:
+            case Ch4:
+            case Ch5:
+            case Ch6:
+            case Ch7:
+            case Ch8:
+            case Ch9:
+                return TileClass.Character;
+            case Bam1:
+            case Bam2:
+            case Bam3:
+            case Bam4:
+            case Bam5:
+            case Bam6:
+            case Bam7:
+            case Bam8:
+            case Bam9:
+                return TileClass.Bamboo;
+            case Cir1:
+            case Cir2:
+            case Cir3:
+            case Cir4:
+            case Cir5:
+            case Cir6:
+            case Cir7:
+            case Cir8:
+            case Cir9:
+                return TileClass.Circle;
+            case Dra1:
+            case Dra2:
+            case Dra3:
+                return TileClass.Dragon;
+            case Wind1:
+            case Wind2:
+            case Wind3:
+            case Wind4:
+                return TileClass.Wind;
+            case Sea:
+                return TileClass.Season;
+            case Flo:
+                return TileClass.Flower;
+            default: // Really not possible but makes the compiler stop complaining.
+                return null;
+        }
     }
 }

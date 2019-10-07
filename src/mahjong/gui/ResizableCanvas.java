@@ -7,16 +7,22 @@ import javafx.scene.paint.Color;
 public class ResizableCanvas extends Canvas {
 
 	private GraphicsContext context;
+	private ICanvasRenderer renderer;
 
 	public ResizableCanvas() {
 		context = getGraphicsContext2D();
+		renderer = null;
 		widthProperty().addListener(evt -> draw());
 		heightProperty().addListener(evt -> draw());
 	}
 
 	private void draw() {
-		context.setFill(Color.LIGHTGRAY);
-		context.fillRect(0, 0, getWidth(), getHeight());
+		if (renderer != null)
+			renderer.draw(context);
+	}
+
+	public void setRenderer(ICanvasRenderer renderer) {
+		this.renderer = renderer;
 	}
 
 	@Override
