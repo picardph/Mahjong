@@ -1,16 +1,80 @@
-package mahjong;
+package Mahjong;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class Game {
 
     // Board Array
-    Tile[][][] board;
+    int[][][] board;
+
+    // Hashmap matches tile reference to a specific identifier
+    HashMap<Integer, Tile> tileIdentifiers = new HashMap<Integer, Tile>();
 
     public Game(String template) {
-        board = new Tile[30][16][5];
+        board = new int[30][16][5];
         loadGame(template);
     }
 
 	private void loadGame(String filein) {
+
+        // temporary Tile object
+        Tile tempTile;
+
+        // variables to increment for loops
+        int i, j, k;
+
+        // String array stores information from 1 line of the file
+        String[] positionInfo = new String[5];
+
+        //creates scanner and an input stream
+        StringBuffer buffer = new StringBuffer();
+
+        //reads in the information from the file
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(filein));
+
+            // increments height
+            for(i = 0; i < 5; i++){
+                // increments y
+                for(j = 0; j < 16; j++) {
+                    // increments x
+                    for(k = 0; k < 30; k++) {
+                        // holds one line from the file
+                        String line = reader.readLine();
+                        if(line.equals("null")) {
+                            board[k][j][i] = 0;
+                        }
+                        else {
+                            positionInfo = line.split(",");
+                            // stores identifier in board
+                            board[k][j][i] = Integer.parseInt(positionInfo[3]);
+                            // stores the information in a temporary tile
+                            tempTile = new Tile(Integer.parseInt(positionInfo[0]), // x
+                                    Integer.parseInt(positionInfo[1]), // y
+                                    Integer.parseInt(positionInfo[2]), // z
+                                    Integer.parseInt(positionInfo[3]), // identifier
+                                    TileType.valueOf(positionInfo[4])); // type
+
+                            // add the tile if the key doesn't already exist
+                            if(!tileIdentifiers.containsKey(tempTile.getIdent())){
+                                tileIdentifiers.put(tempTile.getIdent(), tempTile);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //runs if there is a problem with the file
+        catch (IOException error1) {
+            System.out.println("Error related to: " + filein);
+        }
 	}
 
     public void saveGame(String fileout) {
@@ -77,6 +141,62 @@ public class Game {
     }
 
     public void shuffle() {
+
+        int i, tempIdent;
+        ArrayList<Integer> shuffleIdents = new ArrayList<>();
+        ArrayList<Tile> shuffleTiles = new ArrayList<>();
+        Tile tempTile;
+
+        // puts existing tile identifiers and Tiles into ArrayList
+        for(i = 0; i < 144; i++) {
+            // if the tile is in the HashMap
+            if(tileIdentifiers.containsKey(i)){
+                shuffleIdents.add(i);
+                shuffleTiles.add(tileIdentifiers.get(i));
+            }
+        }
+
+        // shuffle the two ArrayLists
+        Collections.shuffle(shuffleIdents);
+        Collections.shuffle(shuffleTiles);
+
+        // add identifiers in a new order and remove old
+        for(i = 0; i < shuffleTiles.size(); i++){
+            // store values in temporary variables
+            tempIdent = shuffleIdents.get(i);
+            tempTile = shuffleTiles.get(i);
+            // set tile identifier to the key in the HashMap
+            tempTile.setIdent(tempIdent);
+            // remove the identifier from the HashTable
+            tileIdentifiers.remove(tempIdent);
+            // add the identifier back in but paired with a new Tile object
+            tileIdentifiers.put(tempIdent, tempTile);
+        }
+
+        // update coordinates of tiles so they match their positions in board array
+
+        int j, k;
+
+        // stores identifiers of tiles that have been updated
+        ArrayList<Integer> updatedCoords = new ArrayList<>();
+
+        // loop through board
+        for(i = 0; i < 5; i++) {
+            for (j = 0; j < 16; j++) {
+                for (k = 0; k < 30; k++) {
+                    if(board[k][j][i] != 0){
+                        // ensure that only top left coordinate is updated
+                        // since there are 4 positions per tile
+                        if(!updatedCoords.contains(board[k][j][i]))
+                            updatedCoords.add(board[k][j][i]);
+                        // update coordinates of tiles
+                        tileIdentifiers.get(board[k][j][i]).setX(k-1);
+                        tileIdentifiers.get(board[k][j][i]).setY(j-1);
+                        tileIdentifiers.get(board[k][j][i]).setZ(i);
+                    }
+                }
+            }
+        }
 
     }
 
