@@ -82,8 +82,8 @@ public class Game {
     }
 
     public Tile getTile(int x, int y, int z) {
-        /*if (board[x][y][z] != null)
-            return board[x][y][z];*/
+        if (tileIdentifiers.get(board[x][y][z]) != null)
+            return tileIdentifiers.get(board[x][y][z]);
         return null;
     }
 
