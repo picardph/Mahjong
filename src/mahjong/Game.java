@@ -77,6 +77,9 @@ public class Game {
         }
 	}
 
+	private void removeTile(Tile t) {
+    }
+
     public void saveGame(String fileout) {
 
     }
@@ -122,23 +125,10 @@ public class Game {
     }
 
     public void removeTiles(Tile t1, Tile t2) {
-        /*
-        int x1 = t1.getX();
-        int y1 = t1.getY();
-        int z1 = t1.getZ();
-        int x2 = t2.getX();
-        int y2 = t2.getY();
-        int z2 = t2.getZ();
-
-        board[x1][y1][z1] = null;
-        board[x1+1][y1][z1] = null;
-        board[x1][y1+1][z1] = null;
-        board[x1+1][y1+1][z1] = null;
-
-        board[x2][y2][z2] = null;
-        board[x2+1][y2][z2] = null;
-        board[x2][y2+1][z2] = null;
-        board[x2+1][y2+1][z2] = null;*/
+        if (isMatch(t1, t2) && isValidTile(t1) && isValidTile(t2)) {
+            removeTile(t1);
+            removeTile(t2);
+        }
     }
 
     public void shuffle() {
