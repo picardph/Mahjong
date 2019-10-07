@@ -11,10 +11,12 @@ import Mahjong.*;
 public class Game {
 
     // Board Array
-    Tile[][][] board;
+    private int[][][] board;
+    private HashMap<Integer, Tile> tileMap;
 
     public Game(String template) {
-        board = new Tile[30][16][5];
+        board = new int[30][16][5];
+        tileMap = new HashMap<Integer, Tile>();
         loadGame(template);
     }
 
@@ -26,8 +28,8 @@ public class Game {
     }
 
     private Tile getTile(int x, int y, int z) {
-        if (board[x][y][z] != null)
-            return board[x][y][z];
+        if (tileMap.get(board[x][y][z]) != null)
+            return tileMap.get(board[x][y][z]);
         return null;
     }
 
@@ -73,15 +75,15 @@ public class Game {
         int y2 = t2.getY();
         int z2 = t2.getZ();
 
-        board[x1][y1][z1] = null;
-        board[x1+1][y1][z1] = null;
-        board[x1][y1+1][z1] = null;
-        board[x1+1][y1+1][z1] = null;
+        tileMap.put(board[x1][y1][z1], null);
+		tileMap.put(board[x1+1][y1][z1], null);
+		tileMap.put(board[x1][y1+1][z1], null);
+		tileMap.put(board[x1+1][y1+1][z1], null);
 
-        board[x2][y2][z2] = null;
-        board[x2+1][y2][z2] = null;
-        board[x2][y2+1][z2] = null;
-        board[x2+1][y2+1][z2] = null;
+		tileMap.put(board[x2][y2][z2], null);
+		tileMap.put(board[x2+1][y2][z2], null);
+		tileMap.put(board[x2][y2+1][z2], null);
+		tileMap.put(board[x2+1][y2+1][z2], null);
     }
 
     public void shuffle() {
