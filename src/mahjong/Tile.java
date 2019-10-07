@@ -1,4 +1,4 @@
-package mahjong;
+package Mahjong;
 
 public class Tile {
 
