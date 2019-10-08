@@ -78,6 +78,19 @@ public class Game {
 	}
 
 	private void removeTile(Tile t) {
+        int x = t.getX();
+        int y = t.getY();
+        int z = t.getZ();
+
+        board[x][y][z] = 0;
+        board[x+1][y][z] = 0;
+        board[x][y+1][z] = 0;
+        board[x+1][y+1][z] = 0;
+
+        tileIdentifiers.put(board[x][y][z], null);
+        tileIdentifiers.put(board[x+1][y][z], null);
+        tileIdentifiers.put(board[x][y+1][z], null);
+        tileIdentifiers.put(board[x+1][y+1][z], null);
     }
 
     public void saveGame(String fileout) {
