@@ -14,7 +14,7 @@ public class Game {
     HashMap<Integer, Tile> tileIdentifiers = new HashMap<Integer, Tile>();
 
     // Integer that holds the amount of shuffles the player can still use.
-    int shufflesLeft;
+    private int shufflesLeft;
 
     public Game(String template) {
         board = new int[30][16][5];
@@ -161,9 +161,7 @@ public class Game {
     }
 
     public boolean isMatch(Tile t1, Tile t2) {
-        if (t1.getType() == t2.getType() && t1 != t2)
-            return true;
-        return false;
+        return t1.getType() == t2.getType() && t1 != t2;
     }
 
     public void removeTiles(Tile t1, Tile t2) {
@@ -243,7 +241,7 @@ public class Game {
                 validTiles[tilesInArray] = tileIdentifiers.get(i);
                 tilesInArray++; // Incremented to the next available spot in the array
             }
-        if (validTiles.length > 0) // Make sure there are valid tiles before looping
+        if (validTiles[0] != null) // Make sure there are valid tiles before looping
             for (int i = 0; i < tilesInArray; i++) // Loop through the array of valid tiles
                 for (int j = 0; j < tilesInArray; j++)
                     if (isMatch(tileIdentifiers.get(i), tileIdentifiers.get(j))) { // If the loop finds 2 matching tiles,
@@ -256,7 +254,7 @@ public class Game {
     }
 
     public Tile[] getHint() {
-        return null;
+        return findMatch();
     }
 
     public GameState getGameState() {
