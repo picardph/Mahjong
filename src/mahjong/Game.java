@@ -145,15 +145,17 @@ public class Game {
 
             // Check if left side is free, then right side, and if either is free, set sidefree to true
             // Left side check
-        if ((getTile(x-1,y,z) != null /* left of the top left square */ &&
-             getTile(x-1,y+1,z) != null /* left of the bottom left square */) ||
+        if ((getTile(x-1,y,z) == null /* left of the top left square */ &&
+             getTile(x-1,y+1,z) == null /* left of the bottom left square */) ||
             // Right side check
-            (getTile(x+2,y,z) != null /* right of the top right square */ &&
-             getTile(x+2,y+1,z) != null /* right of the bottom right square */))
+            (getTile(x+2,y,z) == null /* right of the top right square */ &&
+             getTile(x+2,y+1,z) == null /* right of the bottom right square */))
                 sideFree = true;
 
             // Check all four squares above the tile, and set topfree to true if they are all free
-        if (z + 1 < 5 && getTile(x,y,z+1) == null /* above the top left square */ &&
+        if (z+1 == 5)
+            topFree = true;
+        else if (z + 1 < 5 && getTile(x,y,z+1) == null /* above the top left square */ &&
             getTile(x,y+1,z+1) == null /* above the bottom left square */ &&
             getTile(x+1,y,z+1) == null /* above the top right square */ &&
             getTile(x+1,y+1,z+1) == null /* above the bottom right square */)
