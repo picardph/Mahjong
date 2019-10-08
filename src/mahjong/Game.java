@@ -11,13 +11,14 @@ public class Game {
     int[][][] board;
 
     // Hashmap matches tile reference to a specific identifier
-    HashMap<Integer, Tile> tileIdentifiers = new HashMap<Integer, Tile>();
+    HashMap<Integer, Tile> tileIdentifiers;
 
     // Integer that holds the amount of shuffles the player can still use.
     private int shufflesLeft;
 
     public Game(String template) {
         board = new int[30][16][5];
+        tileIdentifiers = new HashMap<Integer, Tile>();
         loadGame(template);
         shufflesLeft = 6; // Starts at 6 because the shuffle method uses one.
     }
@@ -84,15 +85,15 @@ public class Game {
         int y = t.getY();
         int z = t.getZ();
 
-        board[x][y][z] = 0;
-        board[x+1][y][z] = 0;
-        board[x][y+1][z] = 0;
-        board[x+1][y+1][z] = 0;
-
         tileIdentifiers.remove(board[x][y][z]);
         tileIdentifiers.remove(board[x+1][y][z]);
         tileIdentifiers.remove(board[x][y+1][z]);
         tileIdentifiers.remove(board[x+1][y+1][z]);
+
+        board[x][y][z] = 0;
+        board[x+1][y][z] = 0;
+        board[x][y+1][z] = 0;
+        board[x+1][y+1][z] = 0;
     }
 
     public void saveGame(String fileout) throws IOException {
@@ -127,12 +128,15 @@ public class Game {
     }
 
     public Tile getTile(int x, int y, int z) {
-        if (tileIdentifiers.get(board[x][y][z]) != null)
-            return tileIdentifiers.get(board[x][y][z]);
-        return null;
+        if (x < 0 || x >= 30 || y < 0 || y >= 16 || z < 0 || z >= 5)
+            return null;
+        return  tileIdentifiers.get(board[x][y][z]);
     }
 
     public boolean isValidTile(Tile t) {
+        if (t == null)
+            return false;
+
         boolean sideFree = false;
         boolean topFree = false;
         int x = t.getX();
@@ -149,10 +153,10 @@ public class Game {
                 sideFree = true;
 
             // Check all four squares above the tile, and set topfree to true if they are all free
-        if (getTile(x,y,z+1) != null /* above the top left square */ &&
-            getTile(x,y+1,z+1) != null /* above the bottom left square */ &&
-            getTile(x+1,y,z+1) != null /* above the top right square */ &&
-            getTile(x+1,y+1,z+1) != null /* above the bottom right square */)
+        if (z + 1 < 5 && getTile(x,y,z+1) == null /* above the top left square */ &&
+            getTile(x,y+1,z+1) == null /* above the bottom left square */ &&
+            getTile(x+1,y,z+1) == null /* above the top right square */ &&
+            getTile(x+1,y+1,z+1) == null /* above the bottom right square */)
                 topFree = true;
 
         if (sideFree && topFree)
@@ -161,6 +165,8 @@ public class Game {
     }
 
     public boolean isMatch(Tile t1, Tile t2) {
+        if (t1 == null || t2 == null)
+            return false;
         return t1.getType() == t2.getType() && t1 != t2;
     }
 

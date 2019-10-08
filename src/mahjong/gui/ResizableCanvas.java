@@ -1,5 +1,6 @@
 package mahjong.gui;
 
+import com.sun.prism.Graphics;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -19,6 +20,10 @@ public class ResizableCanvas extends Canvas {
 	private void draw() {
 		if (renderer != null)
 			renderer.draw(context);
+	}
+
+	public GraphicsContext getContext() {
+		return context;
 	}
 
 	public void setRenderer(ICanvasRenderer renderer) {

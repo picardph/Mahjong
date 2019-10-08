@@ -28,6 +28,6 @@
         </MenuBar>
     </top>
     <center>
-        <ResizableCanvas fx:id="canvas" width="${border.width}" height="${border.height}"/>
+        <ResizableCanvas fx:id="canvas" width="${border.width}" height="${border.height}" onMouseClicked="#onCanvasClicked" onMouseMoved="#onCanvasMove"/>
     </center>
 </BorderPane>

@@ -5,12 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import mahjong.Game;
-import mahjong.Tile;
-import mahjong.TileClass;
-import mahjong.TileType;
+import mahjong.*;
 
 import java.io.File;
 import java.util.HashMap;
@@ -23,6 +21,8 @@ public class BoardMenuController {
 	private String saveName;
 	private Game game;
 	private HashMap<TileClass, Color> tileColors;
+	private Tile selected;
+	private Tile hover;
 
 	@FXML
 	public void initialize() {
@@ -30,6 +30,8 @@ public class BoardMenuController {
 		saveName = null;
 		// Get the file that was set during the new page process.
 		game = new Game(MahjongApplication.getLoadFile());
+		selected = null;
+		hover = null;
 		canvas.setRenderer((context -> {
 			draw(context);
 		}));
@@ -39,7 +41,7 @@ public class BoardMenuController {
 		tileColors.put(TileClass.Character, Color.BLUE);
 		tileColors.put(TileClass.Bamboo, Color.WHEAT);
 		tileColors.put(TileClass.Circle, Color.YELLOW);
-		tileColors.put(TileClass.Dragon, Color.RED);
+		tileColors.put(TileClass.Dragon, Color.MEDIUMVIOLETRED);
 		tileColors.put(TileClass.Wind, Color.CORNFLOWERBLUE);
 		tileColors.put(TileClass.Season, Color.SADDLEBROWN);
 		tileColors.put(TileClass.Flower, Color.ORANGE);
@@ -93,6 +95,8 @@ public class BoardMenuController {
 
 	public void onShuffleClicked(ActionEvent actionEvent) {
 		game.shuffle();
+		if (game.getGameState() == GameState.Lost)
+			lost();
 	}
 
 	private void won() {
@@ -110,17 +114,144 @@ public class BoardMenuController {
 		context.fillRect(0, 0, width, height);
 
 		// Draw out the grid.
-		for (int x = 0; x < 30; x++) {
+		for (int z = 0; z < 5; z++) {
 			for (int y = 0; y < 16; y++) {
-				for (int z = 0; z < 5; z++) {
+				for (int x = 0; x < 30; x++) {
 					// Draw the right background for the tile.
 					Tile t = game.getTile(x, y, z);
 					if (t != null) {
+						// Draw the background of the tile.
 						context.setFill(tileColors.get(game.getTileClass(t.getType())));
-						context.fillRect(x * 32, y * 32, 32, 32);
+						if (t == hover)
+							context.setFill(Color.WHITE);
+						context.fillRect(t.getX() * 32, t.getY() * 32, 64, 64);
+						// Fill out the border of the tile. This will get drawn multiple times
+						// but it doesn't really matter because it will go right over the old one.
+						context.setStroke(Color.WHITE);
+						// The selected tile will be highlighted with red.
+						if (t == selected)
+							context.setStroke(Color.RED);
+						context.strokeRect(t.getX() * 32, t.getY() * 32, 64, 64);
+
+						// Now draw the tile number in the middle.
+						context.setFill(Color.WHITE);
+						int num = getTileNumber(t.getType());
+						context.fillText(Integer.toString(num), (t.getX() * 32) + 10, (t.getY() * 32) + 10);
 					}
 				}
 			}
+		}
+	}
+
+	public void onCanvasClicked(MouseEvent mouseEvent) {
+		// Figure out which tile was clicked on.
+		Tile t = null;
+		int x = ((int)mouseEvent.getX()) / 32;
+		int y = ((int)mouseEvent.getY()) / 32;
+
+		for (int z = 4; z >= 0; z--) {
+			if (x >= 30 || x < 0 || y >= 16 || y < 0)
+				return;
+
+			t = game.getTile(x, y, z);
+			if (t != null)
+				break;
+		}
+		// Empty spot.
+		if (t == null)
+			return;
+
+		if (game.isValidTile(t)) {
+			// Select the first tile.
+			if (selected == null)
+				selected = t;
+			// Two tiles have been selected so try to match them.
+			else {
+				if (game.isMatch(selected, t)) {
+					game.removeTiles(selected, t);
+					// Deselect the tiles.
+					selected = null;
+					if (game.getGameState() == GameState.Won)
+						won();
+				}
+				// Invalid match. Forget the whole thing...
+				else
+					selected = null;
+			}
+		}
+
+		// Redraw the graphics.
+		draw(canvas.getContext());
+	}
+
+	public void onCanvasMove(MouseEvent mouseEvent) {
+		hover = null;
+		int x = ((int)mouseEvent.getX()) / 32;
+		int y = ((int)mouseEvent.getY()) / 32;
+		if (x >= 30 || x < 0 || y >= 16 || y < 0)
+			return;
+
+		// Figure out which tile the mouse is over.
+		int z;
+		for (z = 4; z >= 0; z--) {
+			hover = game.getTile(x, y, z);
+			if (hover != null)
+				break;
+		}
+
+		// Redraw the graphics.
+		draw(canvas.getContext());
+	}
+
+	private int getTileNumber(TileType type) {
+		switch (type) {
+			case Ch1:
+			case Bam1:
+			case Cir1:
+			case Dra1:
+			case Wind1:
+				return 1;
+			case Ch2:
+			case Bam2:
+			case Cir2:
+			case Dra2:
+			case Wind2:
+				return 2;
+			case Ch3:
+			case Bam3:
+			case Cir3:
+			case Dra3:
+			case Wind3:
+				return 3;
+			case Ch4:
+			case Bam4:
+			case Cir4:
+			case Wind4:
+				return 4;
+			case Ch5:
+			case Bam5:
+			case Cir5:
+				return 5;
+			case Ch6:
+			case Bam6:
+			case Cir6:
+				return 6;
+			case Ch7:
+			case Bam7:
+			case Cir7:
+				return 7;
+			case Ch8:
+			case Bam8:
+			case Cir8:
+				return 8;
+			case Ch9:
+			case Bam9:
+			case Cir9:
+				return 9;
+			case Sea:
+			case Flo:
+			default:
+				return 0;
 		}
 	}
 }
