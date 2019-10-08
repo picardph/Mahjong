@@ -15,9 +15,13 @@ public class Game {
     // Hashmap matches tile reference to a specific identifier
     HashMap<Integer, Tile> tileIdentifiers = new HashMap<Integer, Tile>();
 
+    // Integer that holds the amount of shuffles the player can still use.
+    int shufflesLeft;
+
     public Game(String template) {
         board = new int[30][16][5];
         loadGame(template);
+        shufflesLeft = 6; // Starts at 6 because the shuffle method uses one.
     }
 
 	private void loadGame(String filein) {
@@ -87,10 +91,10 @@ public class Game {
         board[x][y+1][z] = 0;
         board[x+1][y+1][z] = 0;
 
-        tileIdentifiers.put(board[x][y][z], null);
-        tileIdentifiers.put(board[x+1][y][z], null);
-        tileIdentifiers.put(board[x][y+1][z], null);
-        tileIdentifiers.put(board[x+1][y+1][z], null);
+        tileIdentifiers.remove(board[x][y][z]);
+        tileIdentifiers.remove(board[x+1][y][z]);
+        tileIdentifiers.remove(board[x][y+1][z]);
+        tileIdentifiers.remove(board[x+1][y+1][z]);
     }
 
     public void saveGame(String fileout) {
@@ -201,7 +205,7 @@ public class Game {
                 }
             }
         }
-
+        shufflesLeft--;
     }
 
     private Tile[] findMatch() {
@@ -213,7 +217,15 @@ public class Game {
     }
 
     public GameState getGameState() {
-        return null;
+        if (tileIdentifiers.isEmpty())
+            return GameState.Won;
+        if (findMatch() != null)
+            return GameState.InProgress;
+        if (findMatch() == null && shufflesLeft == 0)
+            return GameState.Lost;
+        if (findMatch() == null && shufflesLeft > 0)
+            return GameState.Stuck;
+        return GameState.NoGame;
     }
 
     public TileClass getTileClass(TileType type) {
