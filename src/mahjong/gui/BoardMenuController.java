@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -30,6 +31,8 @@ public class BoardMenuController {
 		saveName = null;
 		// Get the file that was set during the new page process.
 		game = new Game(MahjongApplication.getLoadFile());
+		// Shuffle up the puzzle so it is not the same each time.
+		game.shuffle();
 		selected = null;
 		hover = null;
 		canvas.setRenderer((context -> {
@@ -90,19 +93,28 @@ public class BoardMenuController {
 		System.exit(0);
 	}
 
-	public void onHintClicked(ActionEvent actionEvent) {
-	}
-
 	public void onShuffleClicked(ActionEvent actionEvent) {
+		if (game.getShufflesLeft() == 0) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("No more shuffles!");
+			alert.setContentText("You only get 5 shuffles per game.");
+			alert.showAndWait();
+		}
 		game.shuffle();
-		if (game.getGameState() == GameState.Lost)
-			lost();
 	}
 
 	private void won() {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Congratulations!");
+		alert.setContentText("You have removed all the tiles from the board!");
+		alert.showAndWait();
 	}
 
 	private void lost() {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("You lost!");
+		alert.setContentText("You can only reshuffle the board 5 times in one game!");
+		alert.showAndWait();
 	}
 
 	private void draw(GraphicsContext context) {
@@ -136,7 +148,7 @@ public class BoardMenuController {
 						// Now draw the tile number in the middle.
 						context.setFill(Color.WHITE);
 						int num = getTileNumber(t.getType());
-						context.fillText(Integer.toString(num), (t.getX() * 32) + 10, (t.getY() * 32) + 10);
+						context.fillText(Integer.toString(num) + " (" + Integer.toString(t.getIdent()) + ")", (t.getX() * 32) + 10, (t.getY() * 32) + 10);
 					}
 				}
 			}
@@ -144,6 +156,12 @@ public class BoardMenuController {
 	}
 
 	public void onCanvasClicked(MouseEvent mouseEvent) {
+		if (game.getGameState() == GameState.Lost) {
+			selected = null;
+			draw(canvas.getContext());
+			return;
+		}
+
 		// Figure out which tile was clicked on.
 		Tile t = null;
 		int x = ((int)mouseEvent.getX()) / 32;

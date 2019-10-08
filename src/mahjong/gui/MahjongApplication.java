@@ -24,6 +24,7 @@ public class MahjongApplication extends Application {
 			alert.setTitle("Fatal Exception!");
 			alert.setHeaderText("The program encountered an unexpected exception.");
 			alert.setContentText(e.getMessage());
+			alert.showAndWait();
 		}
 	}
 

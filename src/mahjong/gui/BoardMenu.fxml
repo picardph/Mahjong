@@ -20,8 +20,7 @@
                     <SeparatorMenuItem/>
                     <MenuItem text="Exit" onAction="#onExitClicked"/>
                 </Menu>
-                <Menu text="Edit">
-                    <MenuItem text="Hint" onAction="#onHintClicked"/>
+                <Menu text="Game">
                     <MenuItem text="Shuffle" onAction="#onShuffleClicked"/>
                 </Menu>
             </menus>

@@ -179,6 +179,10 @@ public class Game {
 
     public void shuffle() {
 
+        // Don't shuffle if there are none left.
+        if (shufflesLeft == 0)
+            return;
+
         int i, tempIdent;
         ArrayList<Integer> shuffleIdents = new ArrayList<>();
         ArrayList<Tile> shuffleTiles = new ArrayList<>();
@@ -273,6 +277,10 @@ public class Game {
         if (findMatch() == null && shufflesLeft > 0)
             return GameState.Stuck;
         return GameState.NoGame;
+    }
+
+    public int getShufflesLeft() {
+        return shufflesLeft;
     }
 
     public TileClass getTileClass(TileType type) {
