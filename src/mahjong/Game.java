@@ -234,7 +234,25 @@ public class Game {
     }
 
     private Tile[] findMatch() {
-        return null;
+        Tile[] validTiles = new Tile[100]; // Array to hold all valid tiles
+        int tilesInArray = 0; // Integer to determine where in the array to put/retrieve tiles.
+
+        // Run through the hashmap and check each tile to see if it is valid
+        for (int i = 0; i < tileIdentifiers.size(); i++)
+            if (isValidTile(tileIdentifiers.get(i))) { // If the tile is valid, insert it to the correct place in the array
+                validTiles[tilesInArray] = tileIdentifiers.get(i);
+                tilesInArray++; // Incremented to the next available spot in the array
+            }
+        if (validTiles.length > 0) // Make sure there are valid tiles before looping
+            for (int i = 0; i < tilesInArray; i++) // Loop through the array of valid tiles
+                for (int j = 0; j < tilesInArray; j++)
+                    if (isMatch(tileIdentifiers.get(i), tileIdentifiers.get(j))) { // If the loop finds 2 matching tiles,
+                        Tile[] match = new Tile[2];                                // it returns them in an array
+                        match[0] = tileIdentifiers.get(i);
+                        match[1] = tileIdentifiers.get(j);
+                        return match;
+                    }
+        return null; // If there are no valid tiles or no valid matches, return null.
     }
 
     public Tile[] getHint() {
