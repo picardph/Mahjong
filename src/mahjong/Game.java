@@ -1,8 +1,6 @@
 package mahjong;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -93,8 +91,35 @@ public class Game {
         tileIdentifiers.put(board[x+1][y+1][z], null);
     }
 
-    public void saveGame(String fileout) {
+    public void saveGame(String fileout) throws IOException {
 
+        // variables to increment for loops
+        int i, j, k;
+
+        // create new writer to write in the save file
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileout));
+
+        // increments height
+        for(i = 0; i < 5; i++) {
+            // increments y
+            for (j = 0; j < 16; j++) {
+                // increments x
+                for (k = 0; k < 30; k++) {
+
+                    // if the position is empty
+                    if(board[k][j][i] == 0){
+                        writer.write("null\n");
+                    // if the position is not empty
+                    } else
+                        // write to file in order: x,y,z,identifier,type
+                        writer.write(k + "," + j + "," + i + "," +
+                            tileIdentifiers.get(board[k][j][i]).getIdent() + ","
+                            +  tileIdentifiers.get(board[k][j][i]).getType() + "\n");
+                }
+            }
+        }
+
+        writer.close();
     }
 
     public Tile getTile(int x, int y, int z) {
