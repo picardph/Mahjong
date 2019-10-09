@@ -191,7 +191,7 @@ public class Game {
         Tile tempTile;
 
         // puts existing tile identifiers and Tiles into ArrayList
-        for(i = 0; i < 144; i++) {
+        for(i = 1; i < 145; i++) {
             // if the tile is in the HashMap
             if(tileIdentifiers.containsKey(i)){
                 shuffleIdents.add(i);
