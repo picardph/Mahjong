@@ -153,6 +153,36 @@ public class BoardMenuController {
 				}
 			}
 		}
+
+		// Draw the border around all the tiles. This is not done in the same loop
+		// as before to prevent other rendering from being done over the layer border.
+		for (int z = 0; z < 5; z++) {
+			for (int y = 0; y < 16; y++) {
+				for (int x = 0; x < 30; x++) {
+					// Make sure we are at a tile...
+					if (game.getTile(x, y, z) == null)
+						continue;
+
+					// Check if there is a valid tile in each direction and draw
+					// a black line there if there is not.
+					context.setStroke(Color.BLACK);
+					context.setLineWidth(3.0);
+					// Above
+					if (game.getTile(x, y - 1, z) == null)
+						context.strokeLine(x * 32, y * 32, (x + 1) * 32, y * 32);
+					// Below
+					if (game.getTile(x, y + 1, z) == null)
+						context.strokeLine(x * 32, (y + 1) * 32, (x + 1) * 32, (y + 1) * 32);
+					// Left
+					if (game.getTile(x - 1, y, z) == null)
+						context.strokeLine(x * 32, y * 32, x * 32, (y + 1) * 32);
+					// Right
+					if (game.getTile(x + 1, y, z) == null)
+						context.strokeLine((x + 1) * 32, y * 32, (x + 1) * 32, (y + 1) * 32);
+					context.setLineWidth(1.0);
+				}
+			}
+		}
 	}
 
 	public void onCanvasClicked(MouseEvent mouseEvent) {
