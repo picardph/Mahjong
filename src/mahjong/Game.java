@@ -8,10 +8,10 @@ import java.util.HashMap;
 public class Game {
 
     // Board Array
-    int[][][] board;
+    private int[][][] board;
 
     // Hashmap matches tile reference to a specific identifier
-    HashMap<Integer, Tile> tileIdentifiers;
+    private HashMap<Integer, Tile> tileIdentifiers;
 
     // Integer that holds the amount of shuffles the player can still use.
     private int shufflesLeft;
@@ -43,17 +43,16 @@ public class Game {
             BufferedReader reader = new BufferedReader(new FileReader(filein));
 
             // increments height
-            for(i = 0; i < 5; i++){
+            for (i = 0; i < 5; i++) {
                 // increments y
-                for(j = 0; j < 16; j++) {
+                for (j = 0; j < 16; j++) {
                     // increments x
-                    for(k = 0; k < 30; k++) {
+                    for (k = 0; k < 30; k++) {
                         // holds one line from the file
                         String line = reader.readLine();
-                        if(line.equals("null")) {
+                        if (line.equals("null")) {
                             board[k][j][i] = 0;
-                        }
-                        else {
+                        } else {
                             positionInfo = line.split(",");
                             // stores identifier in board
                             board[k][j][i] = Integer.parseInt(positionInfo[3]);
@@ -65,17 +64,16 @@ public class Game {
                                     TileType.valueOf(positionInfo[4])); // type
 
                             // add the tile if the key doesn't already exist
-                            if(!tileIdentifiers.containsKey(tempTile.getIdent())){
+                            if (!tileIdentifiers.containsKey(tempTile.getIdent())) {
                                 tileIdentifiers.put(tempTile.getIdent(), tempTile);
                             }
                         }
                     }
                 }
             }
-        }
 
-        //runs if there is a problem with the file
-        catch (IOException error1) {
+            //runs if there is a problem with the file
+        } catch (IOException error1) {
             System.out.println("Error related to: " + filein);
         }
 	}
@@ -86,14 +84,14 @@ public class Game {
         int z = t.getZ();
 
         tileIdentifiers.remove(board[x][y][z]);
-        tileIdentifiers.remove(board[x+1][y][z]);
-        tileIdentifiers.remove(board[x][y+1][z]);
-        tileIdentifiers.remove(board[x+1][y+1][z]);
+        tileIdentifiers.remove(board[x + 1][y][z]);
+        tileIdentifiers.remove(board[x][y + 1][z]);
+        tileIdentifiers.remove(board[x + 1][y + 1][z]);
 
         board[x][y][z] = 0;
-        board[x+1][y][z] = 0;
-        board[x][y+1][z] = 0;
-        board[x+1][y+1][z] = 0;
+        board[x + 1][y][z] = 0;
+        board[x][y + 1][z] = 0;
+        board[x + 1][y + 1][z] = 0;
     }
 
     public void saveGame(String fileout) throws IOException {
@@ -105,21 +103,21 @@ public class Game {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileout));
 
         // increments height
-        for(i = 0; i < 5; i++) {
+        for (i = 0; i < 5; i++) {
             // increments y
             for (j = 0; j < 16; j++) {
                 // increments x
                 for (k = 0; k < 30; k++) {
 
                     // if the position is empty
-                    if(board[k][j][i] == 0){
+                    if (board[k][j][i] == 0) {
                         writer.write("null\n");
                     // if the position is not empty
                     } else
                         // write to file in order: x,y,z,identifier,type
-                        writer.write(k + "," + j + "," + i + "," +
-                            tileIdentifiers.get(board[k][j][i]).getIdent() + ","
-                            +  tileIdentifiers.get(board[k][j][i]).getType() + "\n");
+                        writer.write(k + "," + j + "," + i + ","
+                            + tileIdentifiers.get(board[k][j][i]).getIdent() + ","
+                            + tileIdentifiers.get(board[k][j][i]).getType() + "\n");
                 }
             }
         }
@@ -145,20 +143,20 @@ public class Game {
 
             // Check if left side is free, then right side, and if either is free, set sidefree to true
             // Left side check
-        if ((getTile(x-1,y,z) == null /* left of the top left square */ &&
-             getTile(x-1,y+1,z) == null /* left of the bottom left square */) ||
+        if ((getTile(x - 1, y, z) == null /* left of the top left square */
+            && getTile(x - 1, y + 1, z) == null /* left of the bottom left square */)
             // Right side check
-            (getTile(x+2,y,z) == null /* right of the top right square */ &&
-             getTile(x+2,y+1,z) == null /* right of the bottom right square */))
-                sideFree = true;
+            || (getTile(x + 2, y, z) == null /* right of the top right square */
+            && getTile(x + 2, y + 1, z) == null /* right of the bottom right square */))
+            sideFree = true;
 
             // Check all four squares above the tile, and set topfree to true if they are all free
-        if (z+1 == 5)
+        if (z + 1 >= board[0][0].length) // If the tile is at the top of the board, its top must be free
             topFree = true;
-        else if (z + 1 < 5 && getTile(x,y,z+1) == null /* above the top left square */ &&
-            getTile(x,y+1,z+1) == null /* above the bottom left square */ &&
-            getTile(x+1,y,z+1) == null /* above the top right square */ &&
-            getTile(x+1,y+1,z+1) == null /* above the bottom right square */)
+        else if (z + 1 < 5 && getTile(x, y, z + 1) == null /* above the top left square */
+            && getTile(x, y + 1, z + 1) == null /* above the bottom left square */
+            && getTile(x + 1, y, z + 1) == null /* above the top right square */
+            && getTile(x + 1, y + 1, z + 1) == null /* above the bottom right square */)
                 topFree = true;
 
         if (sideFree && topFree)
@@ -167,9 +165,9 @@ public class Game {
     }
 
     public boolean isMatch(Tile t1, Tile t2) {
-        if (t1 == null || t2 == null)
+        if (t1 == null || t2 == null) // Makes sure the tile is not being checked against itself
             return false;
-        return t1.getType() == t2.getType() && t1 != t2;
+        return t1.getType() == t2.getType() && t1 != t2; // True if the tile type is the same
     }
 
     public void removeTiles(Tile t1, Tile t2) {
@@ -191,9 +189,9 @@ public class Game {
         Tile tempTile;
 
         // puts existing tile identifiers and Tiles into ArrayList
-        for(i = 1; i < 145; i++) {
+        for (i = 1; i < 145; i++) {
             // if the tile is in the HashMap
-            if(tileIdentifiers.containsKey(i)){
+            if (tileIdentifiers.containsKey(i)) {
                 shuffleIdents.add(i);
                 shuffleTiles.add(tileIdentifiers.get(i));
             }
@@ -204,7 +202,7 @@ public class Game {
         Collections.shuffle(shuffleTiles);
 
         // add identifiers in a new order and remove old
-        for(i = 0; i < shuffleTiles.size(); i++){
+        for (i = 0; i < shuffleTiles.size(); i++) {
             // store values in temporary variables
             tempIdent = shuffleIdents.get(i);
             tempTile = shuffleTiles.get(i);
@@ -224,17 +222,17 @@ public class Game {
         ArrayList<Integer> updatedCoords = new ArrayList<>();
 
         // loop through board
-        for(i = 0; i < 5; i++) {
+        for (i = 0; i < 5; i++) {
             for (j = 0; j < 16; j++) {
                 for (k = 0; k < 30; k++) {
-                    if(board[k][j][i] != 0){
+                    if (board[k][j][i] != 0) {
                         // ensure that only top left coordinate is updated
                         // since there are 4 positions per tile
-                        if(!updatedCoords.contains(board[k][j][i]))
+                        if (!updatedCoords.contains(board[k][j][i]))
                             updatedCoords.add(board[k][j][i]);
                         // update coordinates of tiles
-                        tileIdentifiers.get(board[k][j][i]).setX(k-1);
-                        tileIdentifiers.get(board[k][j][i]).setY(j-1);
+                        tileIdentifiers.get(board[k][j][i]).setX(k - 1);
+                        tileIdentifiers.get(board[k][j][i]).setY(j - 1);
                         tileIdentifiers.get(board[k][j][i]).setZ(i);
                     }
                 }
