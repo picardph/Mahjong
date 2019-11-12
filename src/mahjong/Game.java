@@ -7,6 +7,10 @@ import java.util.HashMap;
 
 public class Game {
 
+    private final int xSize = 30;
+    private final int ySize = 16;
+    private final int zSize = 5;
+
     // Board Array
     private int[][][] board;
 
@@ -17,10 +21,9 @@ public class Game {
     private int shufflesLeft;
 
     public Game(String template) {
-        board = new int[30][16][5];
+        board = new int[xSize][ySize][zSize];
         tileIdentifiers = new HashMap<Integer, Tile>();
         loadGame(template);
-        shufflesLeft = 6; // Starts at 6 because the shuffle method uses one.
     }
 
 	private void loadGame(String filein) {
@@ -42,14 +45,18 @@ public class Game {
 
             BufferedReader reader = new BufferedReader(new FileReader(filein));
 
+            String line = reader.readLine();
+            positionInfo = line.split(",");
+            shufflesLeft = Integer.parseInt(positionInfo[0]);
+
             // increments height
-            for (i = 0; i < 5; i++) {
+            for (i = 0; i < zSize; i++) {
                 // increments y
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < ySize; j++) {
                     // increments x
-                    for (k = 0; k < 30; k++) {
+                    for (k = 0; k < xSize; k++) {
                         // holds one line from the file
-                        String line = reader.readLine();
+                        line = reader.readLine();
                         if (line.equals("null")) {
                             board[k][j][i] = 0;
                         } else {
@@ -102,12 +109,15 @@ public class Game {
         // create new writer to write in the save file
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileout));
 
+        // include the number of shuffles left
+        writer.write(shufflesLeft + "\n");
+
         // increments height
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < zSize; i++) {
             // increments y
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < ySize; j++) {
                 // increments x
-                for (k = 0; k < 30; k++) {
+                for (k = 0; k < xSize; k++) {
 
                     // if the position is empty
                     if (board[k][j][i] == 0) {
@@ -126,7 +136,7 @@ public class Game {
     }
 
     public Tile getTile(int x, int y, int z) {
-        if (x < 0 || x >= 30 || y < 0 || y >= 16 || z < 0 || z >= 5)
+        if (x < 0 || x >= xSize || y < 0 || y >= ySize || z < 0 || z >= zSize)
             return null;
         return  tileIdentifiers.get(board[x][y][z]);
     }
@@ -222,9 +232,9 @@ public class Game {
         ArrayList<Integer> updatedCoords = new ArrayList<>();
 
         // loop through board
-        for (i = 0; i < 5; i++) {
-            for (j = 0; j < 16; j++) {
-                for (k = 0; k < 30; k++) {
+        for (i = 0; i < zSize; i++) {
+            for (j = 0; j < ySize; j++) {
+                for (k = 0; k < xSize; k++) {
                     if (board[k][j][i] != 0) {
                         // ensure that only top left coordinate is updated
                         // since there are 4 positions per tile
