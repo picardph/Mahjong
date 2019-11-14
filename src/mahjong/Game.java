@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Game {
 
@@ -20,9 +21,13 @@ public class Game {
     // Integer that holds the amount of shuffles the player can still use.
     private int shufflesLeft;
 
+    // Stack object to hold the tiles that the player has removed.
+    private Stack<Tile> removedTiles;
+
     public Game(String template) {
         board = new int[xSize][ySize][zSize];
         tileIdentifiers = new HashMap<Integer, Tile>();
+        removedTiles = new Stack<Tile>();
         loadGame(template);
     }
 
@@ -85,7 +90,24 @@ public class Game {
         }
 	}
 
+	private void addTile(Tile t){
+		int x = t.getX();
+		int y = t.getY();
+		int z = t.getZ();
+		int id = t.getIdent();
+
+		board[x][y][z] = id;
+		board[x+1][y][z] = id;
+		board[x][y+1][z] = id;
+		board[x+1][y+1][z] = id;
+
+		tileIdentifiers.put(board[x][y][z], t);
+	}
+
 	private void removeTile(Tile t) {
+    	// Add the tile to the removed tiles stack
+		removedTiles.push(t);
+
         int x = t.getX();
         int y = t.getY();
         int z = t.getZ();
@@ -100,6 +122,25 @@ public class Game {
         board[x][y + 1][z] = 0;
         board[x + 1][y + 1][z] = 0;
     }
+
+    private void undo() {
+    	for (int i = 0; i < 2; i++) {
+			Tile t = removedTiles.pop();
+
+			int x = t.getX();
+			int y = t.getY();
+			int z = t.getZ();
+			int ident = t.getIdent();
+
+			board[x][y][z] = ident;
+			board[x + 1][y][z] = ident;
+			board[x][y + 1][z] = ident;
+			board[x + 1][y + 1][z] = ident;
+
+			tileIdentifiers.put(board[x][y][z], t);
+		}
+
+	}
 
     public void saveGame(String fileout) throws IOException {
 
