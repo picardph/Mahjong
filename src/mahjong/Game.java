@@ -1,10 +1,7 @@
 package mahjong;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class Game {
 
@@ -332,6 +329,10 @@ public class Game {
 
     public int getShufflesLeft() {
         return shufflesLeft;
+    }
+
+    public Tile[] getAllTiles() {
+        return tileIdentifiers.values().toArray(new Tile[0]);
     }
 
     public TileClass getTileClass(TileType type) {
