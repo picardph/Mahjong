@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import mahjong.gui.ResizableCanvas?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="border"
+            fx:controller="mahjong.gui.BoardMenuController"
+            prefHeight="600.0"
+            prefWidth="900.0">
+    <top>
+        <MenuBar fx:id="menuBar">
+            <menus>
+                <Menu text="File">
+                    <MenuItem text="New" onAction="#onNewClicked"/>
+                    <MenuItem text="Open" onAction="#onOpenClicked"/>
+                    <MenuItem text="Save" onAction="#onSaveClicked"/>
+                    <MenuItem text="Save As" onAction="#onSaveAsClicked"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Exit" onAction="#onExitClicked"/>
+                </Menu>
+                <Menu text="Game">
+                    <MenuItem text="Shuffle" onAction="#onShuffleClicked"/>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <ResizableCanvas fx:id="canvas" width="${border.width}" height="${border.height}" onMouseClicked="#onCanvasClicked" onMouseMoved="#onCanvasMove"/>
+    </center>
+</BorderPane>
