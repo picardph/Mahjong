@@ -14,7 +14,6 @@ public class Game {
 
     // Timer
     private Timer timer;
-
     // Timer Helper
     private TimerTask task;
 
