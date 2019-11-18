@@ -23,7 +23,7 @@ public class NewMenuController {
 		String path = "Puzzles/" + (String)list.getSelectionModel().getSelectedItem();
 		if (list.getSelectionModel().getSelectedItem() != null && (new File(path)).exists()) {
 			MahjongApplication.setLoadFile(path);
-			MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("BoardMenu.fxml")), true);
+			MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("BoardMenu.fxml")), false);
 		}
 	}
 }

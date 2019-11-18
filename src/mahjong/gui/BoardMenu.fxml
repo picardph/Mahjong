@@ -2,15 +2,13 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import mahjong.gui.ResizableCanvas?>
+<?import javafx.scene.SubScene?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="border"
-            fx:controller="mahjong.gui.BoardMenuController"
-            prefHeight="600.0"
-            prefWidth="900.0">
+            fx:controller="mahjong.gui.BoardMenuController">
     <top>
-        <MenuBar fx:id="menuBar">
+        <MenuBar>
             <menus>
                 <Menu text="File">
                     <MenuItem text="New" onAction="#onNewClicked"/>
@@ -26,7 +24,4 @@
             </menus>
         </MenuBar>
     </top>
-    <center>
-        <ResizableCanvas fx:id="canvas" width="${border.width}" height="${border.height}" onMouseClicked="#onCanvasClicked" onMouseMoved="#onCanvasMove"/>
-    </center>
 </BorderPane>
