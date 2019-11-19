@@ -20,6 +20,10 @@ public class UITile extends Box {
 		setMaterial(mat);
 	}
 
+	public Tile getTile() {
+		return tile;
+	}
+
 	private static String getTileImagePath(Tile t) {
 		// Map each tile to a file path to the image to represent that tile.
 		switch (t.getType()) {

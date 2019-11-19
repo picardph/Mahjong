@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.FileChooser;
@@ -34,6 +35,7 @@ public class BoardMenuController {
 	private PerspectiveCamera camera;
 	private String saveName;
 	private Game game;
+	private UITile selected;
 
 	@FXML
 	public void initialize() throws FileNotFoundException {
@@ -63,6 +65,8 @@ public class BoardMenuController {
 		hostScene.setFill(Color.CORNFLOWERBLUE);
 		hostScene.setCamera(camera);
 
+		selected = null;
+
 		// Set the initial game board state.
 		setBoardTiles();
 	}
@@ -71,7 +75,7 @@ public class BoardMenuController {
 		MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("NewMenu.fxml")), false);
 	}
 
-	public void onOpenClicked(ActionEvent actionEvent) {
+	public void onOpenClicked(ActionEvent actionEvent) throws FileNotFoundException {
 		FileChooser chooser = new FileChooser();
 		chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT Files (*.txt)", "*.txt"));
 
@@ -82,6 +86,7 @@ public class BoardMenuController {
 		// Store the save name.
 		saveName = f.getAbsolutePath();
 		game = new Game(saveName);
+		setBoardTiles();
 	}
 
 	public void onSaveClicked(ActionEvent actionEvent) throws Exception {
@@ -132,6 +137,31 @@ public class BoardMenuController {
 			tile.setTranslateX(50 + t.getX() * 16);
 			tile.setTranslateY(50 + t.getY() * 23);
 			tile.setTranslateZ(-t.getZ() * 25);
+			tile.setOnMouseClicked(e -> {
+				// We already have selected something...
+				if (selected != null) {
+					if (game.isMatch(selected.getTile(), tile.getTile()))
+						game.removeTiles(selected.getTile(), tile.getTile());
+					selected = null;
+					// Rerun all the board setting.
+					try {
+						setBoardTiles();
+					}
+					catch (Exception ex) {
+						throw new RuntimeException("File not found.");
+					}
+
+					// Look at the state of the game now and see if we won/lost.
+					if (game.getGameState() == GameState.Won)
+						won();
+					else if (game.getGameState() == GameState.Lost)
+						lost();
+				}
+				else {
+					selected = tile;
+					((PhongMaterial) tile.getMaterial()).setDiffuseColor(Color.BLUE);
+				}
+			});
 
 			root.getChildren().add(tile);
 		}
