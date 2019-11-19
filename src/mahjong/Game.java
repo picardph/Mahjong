@@ -12,6 +12,14 @@ public class Game {
     // Board Array
     private int[][][] board;
 
+    // Timer
+    private Timer timer;
+    // Timer Helper
+    private TimerTask task;
+
+    // Timer Entry
+    private TimerEntry entry;
+
     // Hashmap matches tile reference to a specific identifier
     private HashMap<Integer, Tile> tileIdentifiers;
 
@@ -26,6 +34,10 @@ public class Game {
         tileIdentifiers = new HashMap<Integer, Tile>();
         removedTiles = new Stack<Tile>();
         loadGame(template);
+        timer = new Timer();
+        task = new TimerHelper();
+        timer.schedule(task, 1000, 1000);
+        entry = new TimerEntry(0, 0);
     }
 
 	private void loadGame(String filein) {
@@ -325,6 +337,10 @@ public class Game {
         if (findMatch() == null && shufflesLeft > 0)
             return GameState.Stuck;
         return GameState.NoGame;
+    }
+
+    public void updateTimer() {
+
     }
 
     public int getShufflesLeft() {
