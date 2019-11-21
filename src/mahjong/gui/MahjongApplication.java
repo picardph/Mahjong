@@ -1,6 +1,7 @@
 package mahjong.gui;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -60,6 +61,11 @@ public class MahjongApplication extends Application {
 		primaryStage.setTitle("mahjong");
 		primaryStage.setResizable(false);
 		primaryStage.setScene(new Scene(root, 300, 275));
+		// JavaFX can be funny about window closing.
+		primaryStage.setOnCloseRequest(e -> {
+			Platform.exit();
+			System.exit(0);
+		});
 		primaryStage.show();
 	}
 }

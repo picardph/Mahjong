@@ -119,14 +119,19 @@ public class BoardMenuController {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Game Info");
 		alert.setContentText("You have " + game.getShufflesLeft() + " shuffles left. Be careful!");
+		alert.showAndWait();
 	}
 
 	public void onShuffleClicked(ActionEvent actionEvent) throws FileNotFoundException {
 		if (game.getShufflesLeft() == 0) {
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setTitle("No more shuffles!");
-			alert.setContentText("You only get 5 shuffles per game.");
-			alert.showAndWait();
+			if (game.getGameState() == GameState.Lost)
+				lost();
+			else {
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setTitle("No more shuffles!");
+				alert.setContentText("You only get 5 shuffles per game.");
+				alert.showAndWait();
+			}
 		}
 		game.shuffle();
 		setBoardTiles();
@@ -187,7 +192,8 @@ public class BoardMenuController {
 	private void lost() {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("You lost!");
-		alert.setContentText("You can only reshuffle the board 5 times in one game!");
+		alert.setContentText("You can only reshuffle the board 5 times in one game!" +
+				" There are no more possible matches.");
 		alert.showAndWait();
 	}
 }
