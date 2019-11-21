@@ -1,19 +1,12 @@
 package mahjong.gui;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Point3D;
 import javafx.scene.*;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
@@ -22,8 +15,13 @@ import mahjong.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 
+/**
+ * The board menu controller acts as the middle man between the actual
+ * GUI (handled by BoardMenu.fxml) and the internal game logic/state. In
+ * the MVC design pattern, this class acts as a Controller between the
+ * GUI board and the game board.
+ */
 public class BoardMenuController {
 
 	@FXML
@@ -37,6 +35,12 @@ public class BoardMenuController {
 	private Game game;
 	private LeaderBoard leaders;
 
+	/**
+	 * Called by the FXML file when we should put the game into a starting state. It
+	 * needs to be public so that FXML can call it but it should not be called by
+	 * other parts of the program under any circumstances.
+	 * @throws FileNotFoundException Thrown when the game is unable to load textures for the tiles.
+	 */
 	@FXML
 	public void initialize() throws FileNotFoundException {
 		// Set the size we want the game to be.
@@ -73,10 +77,21 @@ public class BoardMenuController {
 		setBoardTiles();
 	}
 
+	/**
+	 * Called by FXML when the new button in the file menu is selected.
+	 * @param actionEvent Relevant context data about the event.
+	 * @throws Exception Thrown when the new menu FXML file can't be loaded.
+	 */
 	public void onNewClicked(ActionEvent actionEvent) throws Exception {
 		MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("NewMenu.fxml")), false);
 	}
 
+	/**
+	 * Called by FXML when we should display a dialog to let the user load a
+	 * previously saved game from a text file.
+	 * @param actionEvent Relevant context data about the event.
+	 * @throws FileNotFoundException Thrown when the file can't be loaded.
+	 */
 	public void onOpenClicked(ActionEvent actionEvent) throws FileNotFoundException {
 		FileChooser chooser = new FileChooser();
 		chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT Files (*.txt)", "*.txt"));
@@ -91,6 +106,12 @@ public class BoardMenuController {
 		setBoardTiles();
 	}
 
+	/**
+	 * Called by FXML when the user wants to save a previously save game again. If save
+	 * the game has not been saved before, the event will be forwarded to onSaveAsClicked.
+	 * @param actionEvent Relevant context data about the event.
+	 * @throws Exception Can only be thrown when saving for the first time.
+	 */
 	public void onSaveClicked(ActionEvent actionEvent) throws Exception {
 		// If the game was not saved before we have to do a save as instead.
 		if (saveName == null)
@@ -99,6 +120,12 @@ public class BoardMenuController {
 			game.saveGame(saveName);
 	}
 
+	/**
+	 * Called by FXML when the user wants to save a game for the first time
+	 * and wants to pick the location where the game should be saved.
+	 * @param actionEvent Relevant context data about the event.
+	 * @throws Exception Can be thrown when the file can't be saved.
+	 */
 	public void onSaveAsClicked(ActionEvent actionEvent) throws Exception {
 		FileChooser chooser = new FileChooser();
 		chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT Files (*.txt)", "*.txt"));
@@ -113,10 +140,19 @@ public class BoardMenuController {
 		onSaveClicked(actionEvent);
 	}
 
+	/**
+	 * Called by FXML when the user selects the exit menu item.
+	 * @param actionEvent Relevant context data about the event.
+	 */
 	public void onExitClicked(ActionEvent actionEvent) {
 		System.exit(0);
 	}
 
+	/**
+	 * Called by FXML when the user wants to get information about the
+	 * current state of the game.
+	 * @param actionEvent Relevant context data about the event.
+	 */
 	public void onInfoClicked(ActionEvent actionEvent) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Game Info");
@@ -124,6 +160,12 @@ public class BoardMenuController {
 		alert.showAndWait();
 	}
 
+	/**
+	 * Called by FXML when the user wants to see a presentation of the
+	 * top scores. Scores are recorded by the amount of time it took
+	 * to beat the game.
+	 * @param actionEvent Relevant context data about the event.
+	 */
 	public void onHighScoresClicked(ActionEvent actionEvent) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("High Scores");
@@ -141,6 +183,11 @@ public class BoardMenuController {
 		alert.showAndWait();
 	}
 
+	/**
+	 * Called by FXML when the user wants a hint. If there is a matching pair, the
+	 * pair will be highlighted in a green color until the user selects any tile.
+	 * @param actionEvent Relevant context data about the event.
+	 */
 	public void onHintClicked(ActionEvent actionEvent) {
 		Tile[] tiles = game.getHint();
 		if (tiles == null) {
@@ -161,6 +208,13 @@ public class BoardMenuController {
 		}
 	}
 
+	/**
+	 * Called by FXML when the user wants the board to be reshuffled. If
+	 * there are no shuffles left then a game over or a warning message will
+	 * be shown based on if there are valid tiles left.
+	 * @param actionEvent Relevant context data about the event.
+	 * @throws FileNotFoundException Can be thrown when a texture for a tile can't be found.
+	 */
 	public void onShuffleClicked(ActionEvent actionEvent) throws FileNotFoundException {
 		if (game.getShufflesLeft() == 0) {
 			if (game.getGameState() == GameState.Lost)
@@ -177,9 +231,11 @@ public class BoardMenuController {
 	}
 
 	private void setBoardTiles() throws FileNotFoundException {
+		// Get rid of any tiles that where on the board beforehand.
 		clearBoardTiles();
 		// Get every tile in the game and make it visible on the board.
 		for (Tile t : game.getAllTiles()) {
+			// Create the new visual representation of the tile.
 			UITile tile = new UITile(t);
 			tile.setWidth(32);
 			tile.setHeight(46);
@@ -187,6 +243,7 @@ public class BoardMenuController {
 			tile.setTranslateX(50 + t.getX() * 16);
 			tile.setTranslateY(50 + t.getY() * 23);
 			tile.setTranslateZ(-t.getZ() * 25);
+			// JavaFX will call our closure when the tile is clicked.
 			tile.setOnMouseClicked(e -> {
 				// Get rid of all green colored hint tiles when we select something.
 				for (Node n : root.getChildren()) {
@@ -197,11 +254,16 @@ public class BoardMenuController {
 
 				// We already have selected something...
 				if (selected != null) {
+					// If it is a match then we can go ahead and get rid of it.
 					if (game.isMatch(selected.getTile(), tile.getTile()))
 						game.removeTiles(selected.getTile(), tile.getTile());
 					selected = null;
 					// Rerun all the board setting.
 					try {
+						// This might worry some people because it looks like we could
+						// get stuck in an infinite loop. This is not possible because we
+						// are calling this from a closure that is called later and not
+						// in the score of setBoardTiles anymore.
 						setBoardTiles();
 					}
 					catch (Exception ex) {
@@ -214,12 +276,13 @@ public class BoardMenuController {
 					else if (game.getGameState() == GameState.Lost)
 						lost();
 				}
+				// Nothing has been selected yet so make it the first selection.
 				else {
 					selected = tile;
 					((PhongMaterial)tile.getMaterial()).setDiffuseColor(Color.BLUE);
 				}
 			});
-
+			// Add the tile to the visual board.
 			root.getChildren().add(tile);
 		}
 	}

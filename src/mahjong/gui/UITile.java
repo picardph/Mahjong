@@ -8,10 +8,20 @@ import mahjong.Tile;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * A custom JavaFX node that wraps up the underlying game's tile class so
+ * that is displayed in 3D with a texture.
+ */
 public class UITile extends Box {
 
 	private Tile tile;
 
+	/**
+	 * Create a new visual tile. It will not be added to the visual board
+	 * state or to the underlying representation until manually done so.
+	 * @param tile The underlying tile to wrap up.
+	 * @throws FileNotFoundException Thrown when the texture can't be loaded.
+	 */
 	public UITile(Tile tile) throws FileNotFoundException {
 		this.tile = tile;
 
@@ -20,6 +30,11 @@ public class UITile extends Box {
 		setMaterial(mat);
 	}
 
+	/**
+	 * Get the underlying tile from the game that is being represented
+	 * by this element.
+	 * @return The underlying tile.
+	 */
 	public Tile getTile() {
 		return tile;
 	}
