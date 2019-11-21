@@ -1,13 +1,11 @@
 package mahjong.gui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point3D;
-import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.SceneAntialiasing;
-import javafx.scene.SubScene;
+import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
@@ -143,6 +141,26 @@ public class BoardMenuController {
 		alert.showAndWait();
 	}
 
+	public void onHintClicked(ActionEvent actionEvent) {
+		Tile[] tiles = game.getHint();
+		if (tiles == null) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("No matches!");
+			alert.setContentText("There are no more possible matches. Shuffle the board and try again!");
+			alert.showAndWait();
+		}
+		else {
+			// Find the matching tiles and set them to be green colored.
+			for (Node n : root.getChildren()) {
+				UITile t = (UITile)n;
+				// If this tile is one of the two matches then set
+				// the tile to be green.
+				if (tiles[0] == t.getTile() || tiles[1] == t.getTile())
+					((PhongMaterial)t.getMaterial()).setDiffuseColor(Color.GREEN);
+			}
+		}
+	}
+
 	public void onShuffleClicked(ActionEvent actionEvent) throws FileNotFoundException {
 		if (game.getShufflesLeft() == 0) {
 			if (game.getGameState() == GameState.Lost)
@@ -170,6 +188,13 @@ public class BoardMenuController {
 			tile.setTranslateY(50 + t.getY() * 23);
 			tile.setTranslateZ(-t.getZ() * 25);
 			tile.setOnMouseClicked(e -> {
+				// Get rid of all green colored hint tiles when we select something.
+				for (Node n : root.getChildren()) {
+					UITile uiT = (UITile)n;
+					if (((PhongMaterial)uiT.getMaterial()).getDiffuseColor() == Color.GREEN)
+						((PhongMaterial)uiT.getMaterial()).setDiffuseColor(Color.WHITE);
+				}
+
 				// We already have selected something...
 				if (selected != null) {
 					if (game.isMatch(selected.getTile(), tile.getTile()))
@@ -191,7 +216,7 @@ public class BoardMenuController {
 				}
 				else {
 					selected = tile;
-					((PhongMaterial) tile.getMaterial()).setDiffuseColor(Color.BLUE);
+					((PhongMaterial)tile.getMaterial()).setDiffuseColor(Color.BLUE);
 				}
 			});
 
