@@ -115,6 +115,12 @@ public class BoardMenuController {
 		System.exit(0);
 	}
 
+	public void onInfoClicked(ActionEvent actionEvent) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Game Info");
+		alert.setContentText("You have " + game.getShufflesLeft() + " shuffles left. Be careful!");
+	}
+
 	public void onShuffleClicked(ActionEvent actionEvent) throws FileNotFoundException {
 		if (game.getShufflesLeft() == 0) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
