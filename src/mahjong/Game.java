@@ -61,7 +61,8 @@ public class Game {
 
             String line = reader.readLine();
             positionInfo = line.split(",");
-            shufflesLeft = Integer.parseInt(positionInfo[0]);
+            entry = new TimerEntry(Integer.parseInt(positionInfo[1]), Integer.parseInt(positionInfo[0]));
+            shufflesLeft = Integer.parseInt(positionInfo[2]);
 
             // increments height
             for (i = 0; i < zSize; i++) {
@@ -160,7 +161,7 @@ public class Game {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileout));
 
         // include the number of shuffles left
-        writer.write(shufflesLeft + "\n");
+        writer.write(entry.getMinutes() + "," + entry.getSeconds() + "," + shufflesLeft + "\n");
 
         // increments height
         for (i = 0; i < zSize; i++) {
@@ -324,10 +325,6 @@ public class Game {
         if (findMatch() == null && shufflesLeft > 0)
             return GameState.Stuck;
         return GameState.NoGame;
-    }
-
-    public void updateTimer() {
-
     }
 
     public int getShufflesLeft() {
