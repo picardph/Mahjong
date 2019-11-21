@@ -340,10 +340,6 @@ public class Game {
         return GameState.NoGame;
     }
 
-    public void updateTimer() {
-
-    }
-
     public int getShufflesLeft() {
         return shufflesLeft;
     }

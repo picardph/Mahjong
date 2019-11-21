@@ -34,8 +34,10 @@ public class BoardMenuController {
 	private Group root;
 	private PerspectiveCamera camera;
 	private String saveName;
-	private Game game;
 	private UITile selected;
+
+	private Game game;
+	private LeaderBoard leaders;
 
 	@FXML
 	public void initialize() throws FileNotFoundException {
@@ -49,6 +51,8 @@ public class BoardMenuController {
 		game = new Game(MahjongApplication.getLoadFile());
 		// Shuffle up the puzzle so it is not the same each time.
 		game.shuffle();
+		// Responsible for keeping track of the high scores.
+		leaders = new LeaderBoard();
 
 		root = new Group();
 		hostScene = new SubScene(root, MahjongApplication.getPrimary().getWidth(), MahjongApplication.getPrimary().getWidth(), true, SceneAntialiasing.BALANCED);
@@ -119,6 +123,23 @@ public class BoardMenuController {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Game Info");
 		alert.setContentText("You have " + game.getShufflesLeft() + " shuffles left. Be careful!");
+		alert.showAndWait();
+	}
+
+	public void onHighScoresClicked(ActionEvent actionEvent) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("High Scores");
+
+		if (leaders.size() == 0)
+			alert.setContentText("There are no winners stored!");
+		else {
+			// Build a leader board list.
+			StringBuilder text = new StringBuilder();
+			for (int i = 0; i < leaders.size(); i++)
+				text.append(leaders.entryAtPosition(i)).append("\n");
+			alert.setContentText(text.toString());
+		}
+
 		alert.showAndWait();
 	}
 

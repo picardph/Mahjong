@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import mahjong.gui.MahjongApplication;
 
 import java.io.File;
+import java.util.Objects;
 
 public class NewMenuController {
 	@FXML
@@ -14,8 +15,11 @@ public class NewMenuController {
 
 	@FXML
 	public void initialize() {
+		MahjongApplication.getPrimary().setWidth(300);
+		MahjongApplication.getPrimary().setHeight(275);
+
 		// Find all the puzzle files to read in.
-		for (File f : (new File("Puzzles")).listFiles())
+		for (File f : Objects.requireNonNull((new File("Puzzles")).listFiles()))
 			list.getItems().add(f.getName());
 	}
 
