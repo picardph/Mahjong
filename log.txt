@@ -1,0 +1,218 @@
+commit 9ff997273d231026ca8e79209a97886edea535d0
+Author: picardph <37383062+picardph@users.noreply.github.com>
+Date:   Mon Oct 21 20:20:28 2019 -0400
+
+    Added UML diagram export.
+
+commit 5d652437dc14ad674bac2077e682b522b398b900
+Merge: 2678511 a5e9cb8
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Thu Oct 10 18:47:37 2019 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 26785115728697c554639fa1954e3b9857aa970c
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Thu Oct 10 18:47:16 2019 -0400
+
+    Fixed style errors.
+
+commit a5e9cb89e524b9bf12e8db4ffb83d988ad807c06
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Thu Oct 10 18:07:10 2019 -0400
+
+    Deleted test puzzles that don't work.
+
+commit ded08403c836e0d3bbb7028af8c0ae84093fdf0b
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Wed Oct 9 20:35:57 2019 -0400
+
+    Added border separation lines to the GUI to make it a little easier to play.
+
+commit bc2cf48324c9c1e840c6b8d1e45f56b0bd60f7f2
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Tue Oct 8 22:21:02 2019 -0400
+
+    Fixed shuffle function to include last tile.
+
+commit b8e4996d2c995e689988a9069ac787c656e941b5
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Tue Oct 8 19:24:25 2019 -0400
+
+    Fixed isValidTile with out of bounds check
+
+commit 74d1433b1ade51d6cd0868615d3235a738c5d12d
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Tue Oct 8 14:40:57 2019 -0400
+
+    Made small fixes and made the game show a message when you are out of shuffles. Wining and losing should now work correctly as well. I also made the tile show the ID number when drawn to help with debugging.
+
+commit 8ebc2cb2ce0b6ee1db5e02f7632392814d0b7a79
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Tue Oct 8 14:11:32 2019 -0400
+
+    Fixed getTile, isValidTile, removeTile, and isMatch methods because they where broken and gave bad data. Added the ability to remove tiles from the board, upgraded the drawing method, and started working on the wining and losing GUI.
+
+commit b0339e14b9b442f21b993585f1877148303baf3f
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Oct 7 23:12:08 2019 -0400
+
+    Added functionality to getHint and fixed error in findMatch.
+
+commit 82e623557ba3ab2502b3241532203847be115944
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Oct 7 23:04:53 2019 -0400
+
+    Added functionality to findMatch.
+
+commit 1cf8bf8d8f2f58d5ef7c5a836679bbfc9a7f645d
+Merge: 3a27bb0 398ac83
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Oct 7 22:33:49 2019 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 3a27bb03e65a6cc2dbe14e2b5def2dc98293af23
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Oct 7 22:33:26 2019 -0400
+
+    Save method completed and tested
+
+commit 398ac83f5ae9f396a3fd5cd05ad46ff15aec7a6e
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Oct 7 22:33:10 2019 -0400
+
+    Added shufflesLeft variable and functionality to getGameState. findMatch is still empty though.
+
+commit 3458ff21a00d4573ef0be3c04b27dcfe8c1f82a0
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Oct 7 22:05:10 2019 -0400
+
+    Finished removeTile
+
+commit 66c114f5b5610ee95f7aad81d2d381869715203b
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Oct 7 17:22:09 2019 -0400
+
+    Finished getTile and added removeTile.
+
+commit 6edf32bbaacef3c2d29652ca98b8ddce509ebfec
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Oct 7 17:13:30 2019 -0400
+
+    Patched in Sam's getTile method.
+
+commit bcd44d255a8dbdfc89df0145f0684ce6253812a7
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Oct 7 17:04:40 2019 -0400
+
+    Readded TileClass.java
+
+commit dfb7a59f45c0142326576ad3dffef6ca63a2a8f4
+Author: Philip Picard <picardph@eos11.cis.gvsu.edu>
+Date:   Mon Oct 7 16:53:20 2019 -0400
+
+    Readded GUI code after git removed it...
+
+commit 1bd18119aa6983591ee7c4efd9a47d2cac15dbc7
+Author: Philip Picard <picardph@eos11.cis.gvsu.edu>
+Date:   Mon Oct 7 16:48:48 2019 -0400
+
+    Fixed the folder naming issue. Windows needs to be case insensitive pleeassseeegit diff --stagedgit diff --staged!
+
+commit 2651ca7a67f23a5723a66f06b55c4fb2c9916bca
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Oct 7 16:34:01 2019 -0400
+
+    Fixed incorrect package names and made the Game class compile.
+
+commit 28eb73cc8f380b9f695c4cc58f3470af15250161
+Merge: 25c20f8 0f427f9
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Oct 7 16:31:28 2019 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 25c20f893dbbe320fbdd58d3c01b2a7ee79a412f
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Oct 7 16:30:02 2019 -0400
+
+    Kept working on drawing the game board to the screen.
+
+commit 0f427f909d54f6e49706fb680e3f5ee6e8f6893a
+Merge: daba779 448678c
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Oct 7 11:36:03 2019 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       src/Mahjong/Game.java
+
+commit daba779910f2de10ec02ea63159ee77a4c2e5278
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Oct 7 11:34:36 2019 -0400
+
+    Updated board data structure, updated functions to use the new structures.
+
+commit 448678c56f6270e7e9b1b44d51e3e87a3ecb36c5
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Oct 7 11:00:36 2019 -0400
+
+    This file contains all information for the tiles in a standard Mahjong board. And load and shuffle functions have been completed.
+
+commit 2351da4d78d143f5d74c01098cb7d7c5655936a4
+Merge: e55acc2 5bf58b0
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Sun Oct 6 16:16:40 2019 -0400
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
+commit e55acc29bbb12eaf47bb0da15e3a6a03f1394cac
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Sun Oct 6 15:06:10 2019 -0400
+
+    This file contains all information for the tiles in a standard Mahjong board.
+
+commit 5bf58b05f435140e46a36e568c3bd123ead67d56
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Oct 4 15:07:24 2019 -0400
+
+    Implemented save, save as, and open dialogs. Also added prettier exception handling.
+
+commit cc73e89039c7c00cac406a55a3bc6c3df9c1c238
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Oct 4 13:10:54 2019 -0400
+
+    Fixed project files and menu controller.
+
+commit 31f2bd5f884eb4101a57581f0c27f52a853fa1e8
+Merge: 567f5a4 356f2de
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Oct 4 12:32:44 2019 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 567f5a4780c7faf9d38a7083582db83987e87528
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Oct 4 12:32:25 2019 -0400
+
+    Renamed packages to make JavaFX work since it needs lowercase packages.
+
+commit 356f2dee49a1a3ecd6c352d57cbb35e42809d194
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Thu Oct 3 19:03:46 2019 -0400
+
+    test commit
+
+commit df0d3b02d69efa8a0896a9878c30fda6cba70409
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Thu Oct 3 18:58:21 2019 -0400
+
+    Added comment.
+
+commit 60b9c325db63e3905ce8e0d8c716f3de166e380f
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Thu Oct 3 18:46:34 2019 -0400
+
+    Reuploaded all the code to a new repo.
