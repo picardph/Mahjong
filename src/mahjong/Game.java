@@ -305,9 +305,8 @@ public class Game {
     private Tile[] findMatch() {
         for (Tile t1 : tileIdentifiers.values())
             for (Tile t2 : tileIdentifiers.values())
-                if (isMatch(t1, t2)) {
+                if (isMatch(t1, t2) && isValidTile(t1) && isValidTile(t2))
                     return new Tile[] {t1,t2};
-                }
         return null; // If there are no valid tiles or no valid matches, return null.
     }
 
