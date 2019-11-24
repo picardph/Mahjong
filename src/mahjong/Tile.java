@@ -33,20 +33,20 @@ public class Tile {
 		this.y = y;
 	}
 
-	public TileType getType() {
-		return type;
-	}
-
-	public void setType(TileType type) {
-		this.type = type;
-	}
-
 	public int getZ() {
 		return z;
 	}
 
 	public void setZ(int z) {
 		this.z = z;
+	}
+
+	public TileType getType() {
+		return type;
+	}
+
+	public void setType(TileType type) {
+		this.type = type;
 	}
 
 	public int getIdent() {

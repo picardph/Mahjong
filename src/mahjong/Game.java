@@ -33,6 +33,7 @@ public class Game {
         board = new int[xSize][ySize][zSize];
         tileIdentifiers = new HashMap<Integer, Tile>();
         removedTiles = new Stack<Tile>();
+        shufflesLeft = 5;
         loadGame(template);
         timer = new Timer();
         task = new TimerHelper();
@@ -100,7 +101,7 @@ public class Game {
         }
 	}
 
-	private void addTile(Tile t){
+	public void addTile(Tile t){
 		int x = t.getX();
 		int y = t.getY();
 		int z = t.getZ();
@@ -302,7 +303,7 @@ public class Game {
         shufflesLeft--;
     }
 
-    private Tile[] findMatch() {
+    public Tile[] findMatch() {
         for (Tile t1 : tileIdentifiers.values())
             for (Tile t2 : tileIdentifiers.values())
                 if (isMatch(t1, t2) && isValidTile(t1) && isValidTile(t2))
@@ -315,7 +316,7 @@ public class Game {
     }
 
     public GameState getGameState() {
-        if (tileIdentifiers.isEmpty())
+        if (tileIdentifiers.isEmpty() && !removedTiles.isEmpty())
             return GameState.Won;
         if (findMatch() != null)
             return GameState.InProgress;
@@ -332,6 +333,14 @@ public class Game {
 
     public Tile[] getAllTiles() {
         return tileIdentifiers.values().toArray(new Tile[0]);
+    }
+
+    public HashMap<Integer, Tile> getTileIdentifiers() {
+        return tileIdentifiers;
+    }
+
+    public Stack<Tile> getRemovedTiles() {
+        return removedTiles;
     }
 
     public TileClass getTileClass(TileType type) {
