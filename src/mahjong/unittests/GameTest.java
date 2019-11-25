@@ -18,10 +18,9 @@ public class GameTest {
 	public void gameConstructorTest() throws InterruptedException {
 		String file = "C:\\Users\\sjsis\\IdeaProjects\\Mahjong\\Puzzles\\defaultPuzzle.txt";
 		Game constGame = new Game(file);
-		TimerEntry t = new TimerEntry();
 		assertNotEquals(0, constGame.getAllTiles().length);
 		Thread.sleep(2000);
-		assertNotEquals(0, t.getSeconds());
+		assertNotEquals(0, TimerEntry.getSeconds());
 		assertEquals(6, constGame.getShufflesLeft());
 		assertNotEquals(0, constGame.getTileIdentifiers().size());
 		assertEquals(0, constGame.getRemovedTiles().size());

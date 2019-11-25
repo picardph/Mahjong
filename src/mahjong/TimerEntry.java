@@ -1,47 +1,46 @@
 package mahjong;
 
+/**
+ * Keeps track of the amount of time that the game has been playing
+ * for. Not able to record times over 59 minutes as it does not track
+ * hours.
+ */
 public class TimerEntry {
+	private static int seconds = 0;
+	private static int minutes = 0;
 
-	private static String name;
-	private static int seconds;
-	private static int minutes;
-
-	public TimerEntry() {
-		seconds = getSeconds();
-		minutes = getMinutes();
-		name = getName();
-	}
-
+	/**
+	 * Resets the time to zero statically. Probably a bad design but
+	 * changing it would involve fixing a lot of older code.
+	 * @param inSec Starting seconds.
+	 * @param inMin Starting minutes.
+	 */
 	public TimerEntry(int inSec, int inMin) {
-		name = "";
 		seconds = inSec;
 		minutes = inMin;
 	}
 
-	public static String getName() {
-		return name;
-	}
-
-	public static void setName(String name) {
-		TimerEntry.name = name;
-	}
-
+	/**
+	 * Get the number of seconds that have passed
+	 * since the game has started.
+	 * @return Seconds as integer.
+	 */
 	public static int getSeconds() {
 		return seconds;
 	}
 
-	public static void setSeconds(int sec) {
-		seconds = sec;
-	}
-
+	/**
+	 * Get the number of minutes that have passed since the game started.
+	 * @return Minutes as integer.
+	 */
 	public static int getMinutes() {
 		return minutes;
 	}
 
-	public static void setMinutes(int min) {
-		minutes = min;
-	}
-
+	/**
+	 * Increases the seconds until a minute has passed and then
+	 * it counts it as a minute while resetting the seconds.
+	 */
 	public static void incrementTimer() {
 		if (seconds == 59) {
 			minutes++;
@@ -49,5 +48,13 @@ public class TimerEntry {
 		}
 		else
 			seconds++;
+	}
+
+	/**
+	 * Reset the timer for a new game.
+	 */
+	public static void reset() {
+		seconds = 0;
+		minutes = 0;
 	}
 }
