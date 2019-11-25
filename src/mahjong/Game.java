@@ -83,6 +83,12 @@ public class Game {
                                     Integer.parseInt(positionInfo[3]), // identifier
                                     TileType.valueOf(positionInfo[4])); // type
 
+                            if(tempTile.getX() != k || tempTile.getY() != j || tempTile.getZ() != i)
+                                throw new IllegalArgumentException("Illegal template file passed in.");
+
+                            if(tempTile.getIdent() > 144)
+                                throw new IllegalArgumentException("Illegal template file passed in.");
+
                             // add the tile if the key doesn't already exist
                             if (!tileIdentifiers.containsKey(tempTile.getIdent())) {
                                 tileIdentifiers.put(tempTile.getIdent(), tempTile);
@@ -94,7 +100,7 @@ public class Game {
 
             //runs if there is a problem with the file
         } catch (IOException error1) {
-            System.out.println("Error related to: " + filein);
+            throw new IllegalArgumentException("Illegal template file passed in.");
         }
 	}
 
