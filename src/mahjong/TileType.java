@@ -1,5 +1,9 @@
 package mahjong;
 
+/**
+ * Represents all the specific different kinds
+ * of tiles that are possible on the board.
+ */
 public enum TileType {
 	// These are the names of the types of tiles in our game
 
