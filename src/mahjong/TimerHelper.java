@@ -5,9 +5,8 @@ import java.util.Timer;
 
 class TimerHelper extends TimerTask
 {
-	private TimerEntry t = new TimerEntry();
 	public void run()
 	{
-		t.incrementTimer();
+		TimerEntry.incrementTimer();
 	}
 }

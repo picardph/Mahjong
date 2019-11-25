@@ -11,37 +11,38 @@ public class TimerEntry {
 		minutes = getMinutes();
 		name = getName();
 	}
+
 	public TimerEntry(int inSec, int inMin) {
 		name = "";
 		seconds = inSec;
 		minutes = inMin;
 	}
 
-	public String getName() {
+	public static String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public static void setName(String name) {
+		TimerEntry.name = name;
 	}
 
-	public int getSeconds() {
+	public static int getSeconds() {
 		return seconds;
 	}
 
-	public void setSeconds(int sec) {
+	public static void setSeconds(int sec) {
 		seconds = sec;
 	}
 
-	public int getMinutes() {
+	public static int getMinutes() {
 		return minutes;
 	}
 
-	public void setMinutes(int min) {
+	public static void setMinutes(int min) {
 		minutes = min;
 	}
 
-	public void incrementTimer() {
+	public static void incrementTimer() {
 		if (seconds == 59) {
 			minutes++;
 			seconds = 0;
