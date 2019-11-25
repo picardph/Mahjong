@@ -391,7 +391,8 @@ public class Game {
             return GameState.Lost;
         if (findMatch() == null && shufflesLeft > 0)
             return GameState.Stuck;
-        return GameState.NoGame;
+        // By default assume the game is still playing.
+        return GameState.InProgress;
     }
 
     /**
