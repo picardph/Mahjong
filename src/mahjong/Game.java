@@ -17,14 +17,6 @@ public class Game {
     // Board Array
     private int[][][] board;
 
-    // Timer
-    private Timer timer;
-    // Timer Helper
-    private TimerTask task;
-
-    // Timer Entry
-    private TimerEntry entry;
-
     // Hashmap matches tile reference to a specific identifier
     private HashMap<Integer, Tile> tileIdentifiers;
 
@@ -44,10 +36,6 @@ public class Game {
         removedTiles = new Stack<Tile>();
         shufflesLeft = 5;
         loadGame(template);
-        timer = new Timer();
-        task = new TimerHelper();
-        timer.schedule(task, 1000, 1000);
-        entry = new TimerEntry(0, 0);
     }
 
 	private void loadGame(String filein) {
@@ -71,7 +59,7 @@ public class Game {
 
             String line = reader.readLine();
             positionInfo = line.split(",");
-            entry = new TimerEntry(Integer.parseInt(positionInfo[1]), Integer.parseInt(positionInfo[0]));
+            TimerEntry entry = new TimerEntry(Integer.parseInt(positionInfo[1]), Integer.parseInt(positionInfo[0]));
             shufflesLeft = Integer.parseInt(positionInfo[2]);
 
             // increments height
@@ -95,6 +83,12 @@ public class Game {
                                     Integer.parseInt(positionInfo[3]), // identifier
                                     TileType.valueOf(positionInfo[4])); // type
 
+                            if(tempTile.getX() != k || tempTile.getY() != j || tempTile.getZ() != i)
+                                throw new IllegalArgumentException("Illegal template file passed in.");
+
+                            if(tempTile.getIdent() > 144)
+                                throw new IllegalArgumentException("Illegal template file passed in.");
+
                             // add the tile if the key doesn't already exist
                             if (!tileIdentifiers.containsKey(tempTile.getIdent())) {
                                 tileIdentifiers.put(tempTile.getIdent(), tempTile);
@@ -106,8 +100,11 @@ public class Game {
 
             //runs if there is a problem with the file
         } catch (IOException error1) {
-            System.out.println("Error related to: " + filein);
+            throw new IllegalArgumentException("Illegal template file passed in.");
         }
+
+        if (shufflesLeft == 6)
+        	shuffle();
 	}
 
     /**
@@ -182,7 +179,7 @@ public class Game {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileout));
 
         // include the number of shuffles left
-        writer.write(entry.getMinutes() + "," + entry.getSeconds() + "," + shufflesLeft + "\n");
+        writer.write(TimerEntry.getMinutes() + "," + TimerEntry.getSeconds() + "," + shufflesLeft + "\n");
 
         // increments height
         for (i = 0; i < zSize; i++) {

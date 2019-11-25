@@ -1238,8 +1238,8 @@ null
 null
 null
 null
-9,9,2,122,Dra3
-10,9,2,122,Dra3
+9,9,2,122,Wind1
+10,9,2,122,Wind1
 null
 null
 null

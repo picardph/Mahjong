@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.*;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
@@ -15,6 +16,7 @@ import mahjong.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 
 /**
  * The board menu controller acts as the middle man between the actual
@@ -296,6 +298,14 @@ public class BoardMenuController {
 		alert.setTitle("Congratulations!");
 		alert.setContentText("You have removed all the tiles from the board!");
 		alert.showAndWait();
+
+		TextInputDialog textAlert = new TextInputDialog();
+		textAlert.setTitle("Congratulations!");
+		textAlert.setContentText("You have removed all the tiles from the board! Please enter your name:");
+
+		Optional<String> result = textAlert.showAndWait();
+		// Only enter a name to the high score leader if a name was entered.
+		result.ifPresent(s -> leaders.updateLeaderBoard((TimerEntry.getMinutes() * 60) + TimerEntry.getSeconds(), s, "leaderboard.txt"));
 	}
 
 	private void lost() {
