@@ -189,7 +189,7 @@ public class BoardMenuController {
 	 * @param actionEvent Relevant context data about the event.
 	 */
 	public void onHintClicked(ActionEvent actionEvent) {
-		Tile[] tiles = game.getHint();
+		Tile[] tiles = game.findMatch();
 		if (tiles == null) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("No matches!");

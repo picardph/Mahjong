@@ -3,6 +3,11 @@ package mahjong;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Implements the board and the core rules of the
+ * game. Also implements loading and saving the game
+ * from a text file.
+ */
 public class Game {
 
     private final int xSize = 30;
@@ -29,6 +34,10 @@ public class Game {
     // Stack object to hold the tiles that the player has removed.
     private Stack<Tile> removedTiles;
 
+    /**
+     * Creates a new game from the passed in template file.
+     * @param template The path to the template to use.
+     */
     public Game(String template) {
         board = new int[xSize][ySize][zSize];
         tileIdentifiers = new HashMap<Integer, Tile>();
@@ -101,6 +110,11 @@ public class Game {
         }
 	}
 
+    /**
+     * Add a tile to the board. Make sure that you add another matching
+     * tile otherwise the board will become unbeatable.
+     * @param t The instance of the tile to add.
+     */
 	public void addTile(Tile t){
 		int x = t.getX();
 		int y = t.getY();
@@ -153,6 +167,12 @@ public class Game {
 
 	}
 
+    /**
+     * Takes the board and game state and outputs it to a text file in such a way
+     * that it can be loaded again at a later time.
+     * @param fileout The path of the tile to write to.
+     * @throws IOException Thrown when unable to write to the file.
+     */
     public void saveGame(String fileout) throws IOException {
 
         // variables to increment for loops
@@ -187,12 +207,28 @@ public class Game {
         writer.close();
     }
 
+    /**
+     * Get the tile at a specific position on the board. Remember that a
+     * tile is 2x2 in size so the coordinates are not a one-to-one mapping
+     * to the order of tiles. (0,0,0) is the top left and the top.
+     * @param x The x coordinate. Must be > 0 and < then the board size.
+     * @param y The y coordinate. Must be > 0 and < then the board size.
+     * @param z The z coordinate. Must be > 0 and < then the board size.
+     * @return The tile found or null if the passed in coordinates are out of range.
+     */
     public Tile getTile(int x, int y, int z) {
         if (x < 0 || x >= xSize || y < 0 || y >= ySize || z < 0 || z >= zSize)
             return null;
         return  tileIdentifiers.get(board[x][y][z]);
     }
 
+    /**
+     * Checks to see if the tile could even be removed. A tile must have no
+     * neighbors to the left or to the right in order to be removed. This
+     * method checks to see if that is the case.
+     * @param t The tile to look at.
+     * @return True if the tile could be removed and otherwise false.
+     */
     public boolean isValidTile(Tile t) {
         if (t == null)
             return false;
@@ -203,8 +239,8 @@ public class Game {
         int y = t.getY();
         int z = t.getZ();
 
-            // Check if left side is free, then right side, and if either is free, set sidefree to true
-            // Left side check
+        // Check if left side is free, then right side, and if either is free, set sidefree to true
+        // Left side check
         if ((getTile(x - 1, y, z) == null /* left of the top left square */
             && getTile(x - 1, y + 1, z) == null /* left of the bottom left square */)
             // Right side check
@@ -212,7 +248,7 @@ public class Game {
             && getTile(x + 2, y + 1, z) == null /* right of the bottom right square */))
             sideFree = true;
 
-            // Check all four squares above the tile, and set topfree to true if they are all free
+        // Check all four squares above the tile, and set topfree to true if they are all free
         if (z + 1 >= board[0][0].length) // If the tile is at the top of the board, its top must be free
             topFree = true;
         else if (z + 1 < 5 && getTile(x, y, z + 1) == null /* above the top left square */
@@ -221,17 +257,29 @@ public class Game {
             && getTile(x + 1, y + 1, z + 1) == null /* above the bottom right square */)
                 topFree = true;
 
-        if (sideFree && topFree)
-            return true;
-        return false;
+        return (sideFree && topFree);
     }
 
+    /**
+     * Checks to see if two tiles are of the same type and therefor
+     * are matching. It does not check if those two tiles are valid (meaning
+     * that the sides are clear).
+     * @param t1 The first tile.
+     * @param t2 The second tile to look at.
+     * @return True if they are matching, otherwise false.
+     */
     public boolean isMatch(Tile t1, Tile t2) {
         if (t1 == null || t2 == null) // Makes sure the tile is not being checked against itself
             return false;
         return t1.getType() == t2.getType() && t1 != t2; // True if the tile type is the same
     }
 
+    /**
+     * Removes a pair of tiles as long as they are matching and
+     * are both valid. Otherwise, nothing happens.
+     * @param t1 The first tile to look at.
+     * @param t2 The second tile to look at.
+     */
     public void removeTiles(Tile t1, Tile t2) {
         if (isMatch(t1, t2) && isValidTile(t1) && isValidTile(t2)) {
             removeTile(t1);
@@ -239,6 +287,12 @@ public class Game {
         }
     }
 
+    /**
+     * Reshuffles the board. The shape of the board will stay the same
+     * but the specific tile that is at each location will change. The user
+     * only gets five shuffles per game. After that, the shuffle method
+     * will do nothing.
+     */
     public void shuffle() {
 
         // Don't shuffle if there are none left.
@@ -303,6 +357,12 @@ public class Game {
         shufflesLeft--;
     }
 
+    /**
+     * This method will find a pair of tiles that can be removed. Used to
+     * determine if the game can no longer be beaten or for the user to get
+     * a hint.
+     * @return An array with two values for the match or null if none was found.
+     */
     public Tile[] findMatch() {
         for (Tile t1 : tileIdentifiers.values())
             for (Tile t2 : tileIdentifiers.values())
@@ -311,10 +371,11 @@ public class Game {
         return null; // If there are no valid tiles or no valid matches, return null.
     }
 
-    public Tile[] getHint() {
-        return findMatch();
-    }
-
+    /**
+     * Determine what the current state of the game is. Used to determine if the
+     * game is won, lost, in progress, etc.
+     * @return The state of the game.
+     */
     public GameState getGameState() {
         if (tileIdentifiers.isEmpty() && !removedTiles.isEmpty())
             return GameState.Won;
@@ -327,10 +388,20 @@ public class Game {
         return GameState.NoGame;
     }
 
+    /**
+     * Get the number of shuffles the user has left. Each game
+     * starts with five shuffles.
+     * @return An integer number.
+     */
     public int getShufflesLeft() {
         return shufflesLeft;
     }
 
+    /**
+     * Get a list of all the tiles that are left and need
+     * to be removed.
+     * @return An array of tiles. The array will be empty if there are no tiles.
+     */
     public Tile[] getAllTiles() {
         return tileIdentifiers.values().toArray(new Tile[0]);
     }
@@ -343,6 +414,13 @@ public class Game {
         return removedTiles;
     }
 
+    /**
+     * This will get the class of a specific tile type. For example: the
+     * fourth character tile will return as the "character" class. A type
+     * is a specific kind of tile and the class is the category.
+     * @param type The type of tile to look at.
+     * @return The tile's class.
+     */
     public TileClass getTileClass(TileType type) {
         switch (type) {
             case Ch1:
