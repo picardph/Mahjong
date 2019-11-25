@@ -376,17 +376,15 @@ public class Game {
      * game is won, lost, in progress, etc.
      * @return The state of the game.
      */
-    public GameState getGameState() {
-        if (tileIdentifiers.isEmpty() && !removedTiles.isEmpty())
-            return GameState.Won;
-        if (findMatch() != null)
-            return GameState.InProgress;
-        if (findMatch() == null && shufflesLeft == 0)
-            return GameState.Lost;
-        if (findMatch() == null && shufflesLeft > 0)
-            return GameState.Stuck;
-        return GameState.NoGame;
-    }
+	public GameState getGameState() {
+		if (tileIdentifiers.isEmpty() && !removedTiles.isEmpty())
+			return GameState.Won;
+		if (findMatch() == null && shufflesLeft == 0)
+			return GameState.Lost;
+		if (findMatch() == null && shufflesLeft > 0)
+			return GameState.Stuck;
+		return GameState.InProgress;
+	}
 
     /**
      * Get the number of shuffles the user has left. Each game

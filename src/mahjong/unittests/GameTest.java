@@ -16,32 +16,34 @@ public class GameTest {
 
 	@Test
 	public void gameConstructorTest() throws InterruptedException {
-		String file = "C:\\Users\\sjsis\\IdeaProjects\\Mahjong\\Puzzles\\defaultPuzzle.txt";
+		String file = "Puzzles\\defaultPuzzle.txt";
 		Game constGame = new Game(file);
 		TimerEntry t = new TimerEntry();
 		assertNotEquals(0, constGame.getAllTiles().length);
 		Thread.sleep(2000);
 		assertNotEquals(0, t.getSeconds());
-		assertEquals(6, constGame.getShufflesLeft());
-		assertNotEquals(0, constGame.getTileIdentifiers().size());
-		assertEquals(0, constGame.getRemovedTiles().size());
-		assertEquals(GameState.InProgress, constGame.getGameState());
+		assertEquals(5, constGame.getShufflesLeft());
 	}
 
 	@Test
 	public void gameStateTest() {
-		Game stGame = new Game("C:\\Users\\sjsis\\IdeaProjects\\Mahjong\\Puzzles\\TestPuzzle.txt");
+		Game stGame = new Game("TestTemplates\\Test1.txt");
 		assertEquals(GameState.InProgress, stGame.getGameState());
 		stGame.removeTiles(stGame.findMatch()[0], stGame.findMatch()[1]);
 		assertEquals(GameState.Won, stGame.getGameState());
-		Tile t3 = new Tile(11,11,4,3, TileType.Bam1);
-		Tile t4 = new Tile(7,7,1,4, TileType.Bam2);
-		stGame.addTile(t3);
-		stGame.addTile(t4);
-		assertEquals(GameState.Stuck, stGame.getGameState());
-		System.out.println(stGame.getShufflesLeft());
-		for (int i = 0; i < 6; i++)
-			stGame.shuffle();
-		assertEquals(GameState.Lost, stGame.getGameState());
+		Game badGame = new Game("TestTemplates\\Test2.txt");
+		assertEquals(GameState.Stuck, badGame.getGameState());
+		for (int i = 0; i < 5; i++)
+			badGame.shuffle();
+		assertEquals(GameState.Lost, badGame.getGameState());
+	}
+
+	@Test
+	public void saveLoadTest() throws IOException {
+		Game IOGame = new Game("TestTemplates\\Test3.txt");
+		IOGame.removeTiles(IOGame.findMatch()[0], IOGame.findMatch()[1]);
+		IOGame.saveGame("TestTemplates\\testout.txt");
+		Game ngGame = new Game("TestTemplates\\testout.txt");
+		assertEquals(2, ngGame.getAllTiles().length);
 	}
 }
