@@ -89,8 +89,8 @@ public class Game {
                                     Integer.parseInt(positionInfo[3]), // identifier
                                     TileType.valueOf(positionInfo[4])); // type
 
-                            if(tempTile.getX() != k || tempTile.getY() != j || tempTile.getZ() != i)
-                                throw new IllegalArgumentException("Illegal template file passed in.");
+                            //if(tempTile.getX() != k || tempTile.getY() != j || tempTile.getZ() != i)
+                              //  throw new IllegalArgumentException("Illegal template file passed in.");
 
                             if(tempTile.getIdent() > 144)
                                 throw new IllegalArgumentException("Illegal template file passed in.");
@@ -151,8 +151,10 @@ public class Game {
         board[x + 1][y + 1][z] = 0;
     }
 
-    private void undo() {
+    public void undo() {
     	for (int i = 0; i < 2; i++) {
+            if (removedTiles.peek() == null)
+                return;
 			Tile t = removedTiles.pop();
 
 			int x = t.getX();

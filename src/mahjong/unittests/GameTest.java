@@ -8,10 +8,9 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 public class GameTest {
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void badFileNameTest() {
 		Game g = new Game("bad input");
-		assertEquals(0, g.getAllTiles().length);
 	}
 
 	@Test
@@ -21,7 +20,7 @@ public class GameTest {
 		assertNotEquals(0, constGame.getAllTiles().length);
 		Thread.sleep(2000);
 		assertNotEquals(0, TimerEntry.getSeconds());
-		assertEquals(6, constGame.getShufflesLeft());
+		assertEquals(5, constGame.getShufflesLeft());
 		assertEquals(GameState.InProgress, constGame.getGameState());
 	}
 
@@ -46,4 +45,15 @@ public class GameTest {
 		Game ngGame = new Game("TestTemplates\\testout.txt");
 		assertEquals(2, ngGame.getAllTiles().length);
 	}
+
+	@Test
+	public void undoTest() {
+		Game unGame = new Game ("TestTemplates\\Test3.txt");
+		Tile[] tiles = new Tile[10];
+		tiles = unGame.getAllTiles();
+		unGame.removeTiles(unGame.findMatch()[0], unGame.findMatch()[1]);
+		unGame.undo();
+		assertArrayEquals(unGame.getAllTiles(), tiles);
+	}
+
 }
