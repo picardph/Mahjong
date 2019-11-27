@@ -26,6 +26,9 @@ public class Game {
     // Stack object to hold the tiles that the player has removed.
     private Stack<Tile> removedTiles;
 
+    private Timer timer;
+    private TimerHelper helper;
+
     /**
      * Creates a new game from the passed in template file.
      * @param template The path to the template to use.
@@ -36,6 +39,9 @@ public class Game {
         removedTiles = new Stack<Tile>();
         shufflesLeft = 5;
         loadGame(template);
+        timer = new Timer();
+        helper = new TimerHelper();
+        timer.schedule(helper, 1000, 1000);
     }
 
 	private void loadGame(String filein) {

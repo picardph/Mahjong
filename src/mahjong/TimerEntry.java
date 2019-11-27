@@ -6,8 +6,10 @@ package mahjong;
  * hours.
  */
 public class TimerEntry {
+
 	private static int seconds = 0;
 	private static int minutes = 0;
+	private static ITimeObserver observer = null;
 
 	/**
 	 * Resets the time to zero statically. Probably a bad design but
@@ -56,5 +58,22 @@ public class TimerEntry {
 	public static void reset() {
 		seconds = 0;
 		minutes = 0;
+	}
+
+	/**
+	 * Set the observer that will be called whenever a second passes.
+	 * @param obs The new observer to call.
+	 */
+	public static void setObserver(ITimeObserver obs) {
+		observer = obs;
+	}
+
+	/**
+	 * Called by the TimerHelper when a second passes so
+	 * that the observer is notified.
+	 */
+	public static void change() {
+		if (observer != null)
+			observer.second(minutes, seconds);
 	}
 }

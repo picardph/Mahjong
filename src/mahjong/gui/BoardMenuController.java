@@ -17,6 +17,7 @@ import mahjong.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Optional;
+import java.util.Timer;
 
 /**
  * The board menu controller acts as the middle man between the actual
@@ -77,6 +78,13 @@ public class BoardMenuController {
 
 		// Set the initial game board state.
 		setBoardTiles();
+
+		// Always reset the timer.
+		TimerEntry.reset();
+		// Change the titlebar to hold how much time has passed.
+		TimerEntry.setObserver((minutes, seconds) -> {
+			//MahjongApplication.getPrimary().setTitle("Minutes: " + minutes + " Seconds: " + seconds);
+		});
 	}
 
 	/**
@@ -86,6 +94,7 @@ public class BoardMenuController {
 	 */
 	public void onNewClicked(ActionEvent actionEvent) throws Exception {
 		MahjongApplication.setRoot(FXMLLoader.load(getClass().getResource("NewMenu.fxml")), false);
+		TimerEntry.reset();
 	}
 
 	/**
@@ -106,6 +115,8 @@ public class BoardMenuController {
 		saveName = f.getAbsolutePath();
 		game = new Game(saveName);
 		setBoardTiles();
+
+		TimerEntry.reset();
 	}
 
 	/**

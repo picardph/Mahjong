@@ -18,5 +18,6 @@ class TimerHelper extends TimerTask
 	public void run()
 	{
 		TimerEntry.incrementTimer();
+		TimerEntry.change();
 	}
 }

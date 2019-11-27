@@ -58,6 +58,7 @@ public class MahjongApplication extends Application {
 		root = newRoot;
 		primary.setScene(new Scene(root, 300, 275));
 		primary.setResizable(resizable);
+		primary.setTitle("mahjong");
 	}
 
 	/**
