@@ -1,5 +1,6 @@
 package mahjong.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,9 +82,14 @@ public class BoardMenuController {
 
 		// Always reset the timer.
 		TimerEntry.reset();
-		// Change the titlebar to hold how much time has passed.
+		// Change the title-bar to hold how much time has passed.
 		TimerEntry.setObserver((minutes, seconds) -> {
-			//MahjongApplication.getPrimary().setTitle("Minutes: " + minutes + " Seconds: " + seconds);
+			Platform.runLater(() -> {
+				// setObserver gets called on a separate thread. runLater will tell JavaFX to run
+				// this bit on the main event thread when possible as GUI changes can only be done
+				// there.
+				MahjongApplication.getPrimary().setTitle("Minutes: " + minutes + " Seconds: " + seconds);
+			});
 		});
 	}
 
