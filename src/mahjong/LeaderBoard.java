@@ -1,9 +1,6 @@
 package mahjong;
 
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -30,6 +27,8 @@ public class LeaderBoard {
 
         try {
 
+            File load = new File(fileIn);
+            load.createNewFile();
             FileInputStream iStream = new FileInputStream(fileIn);
             Scanner scanner = new Scanner(iStream);
 
