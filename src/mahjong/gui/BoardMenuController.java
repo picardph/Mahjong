@@ -76,10 +76,15 @@ public class BoardMenuController {
 
         // The save name will be populated when we save for the first time.
         saveName = null;
-        // Get the file that was set during the new page process.
-        game = new Game(MahjongApplication.getLoadFile());
-        // Responsible for keeping track of the high scores.
-        leaders = new LeaderBoard();
+
+        try {
+            // Get the file that was set during the new page process.
+            game = new Game(MahjongApplication.getLoadFile());
+            // Responsible for keeping track of the high scores.
+            leaders = new LeaderBoard();
+        } catch (RuntimeException e) {
+            showError("Failed to load the game file.");
+        }
 
         root = new Group();
         hostScene = new SubScene(root,
@@ -149,7 +154,11 @@ public class BoardMenuController {
         }
         // Store the save name.
         saveName = f.getAbsolutePath();
-        game = new Game(saveName);
+        try {
+            game = new Game(saveName);
+        } catch (RuntimeException e) {
+            showError("Failed to load the game file.");
+        }
         setBoardTiles();
     }
 
@@ -379,11 +388,15 @@ public class BoardMenuController {
 
         Optional<String> result = textAlert.showAndWait();
         // Only enter a name to the high score leader if a name was entered.
-        result.ifPresent(s ->
-                leaders.updateLeaderBoard(
-                        (TimerEntry.getMinutes() * SECONDS)
-                                + TimerEntry.getSeconds(),
-                        s, "leaderboard.txt"));
+        try {
+            result.ifPresent(s ->
+                    leaders.updateLeaderBoard(
+                            (TimerEntry.getMinutes() * SECONDS)
+                                    + TimerEntry.getSeconds(),
+                            s, "leaderboard.txt"));
+        } catch (RuntimeException e) {
+            showError("Failed to load the leader boards file.");
+        }
     }
 
     private void lost() {
@@ -391,6 +404,13 @@ public class BoardMenuController {
         alert.setTitle("You lost!");
         alert.setContentText("You can only reshuffle the board 5 "
                 + "times in one game! There are no more possible matches.");
+        alert.showAndWait();
+    }
+
+    private void showError(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 }
