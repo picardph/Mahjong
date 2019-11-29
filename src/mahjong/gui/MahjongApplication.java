@@ -14,8 +14,8 @@ import java.util.Timer;
 /**
  * The entry point for the application is here. It also holds a reference
  * to the root window that contains our GUI. This class is used to coordinate
- * the opening and closing of different windows and transferring state information
- * between those windows.
+ * the opening and closing of different windows and transferring state
+ * information between those windows.
  */
 public class MahjongApplication extends Application {
 
@@ -26,21 +26,26 @@ public class MahjongApplication extends Application {
 	private static Timer timer = new Timer();
 	private static TimerHelper helper = new TimerHelper();
 
+	private static final int MILLISECONDS = 1000;
+	private static final int DEFAULT_WIDTH = 300;
+	private static final int DEFAULT_HEIGHT = 275;
+
 	/**
-	 * The main entry point called by the Java VM when the program is launched.
-	 * @param args Arguments passed in from the command line. We will ignore them.
+	 * The main entry point called by the Java VM when
+	 * the program is launched.
+	 * @param args Arguments passed in from the command line.
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
-			timer.schedule(helper, 1000, 1000);
-			// The launch method lets JavaFX take control of our core event loop.
+			timer.schedule(helper, MILLISECONDS, MILLISECONDS);
+			// The launch method lets JavaFX take control of our
+			// core event loop.
 			launch(args);
-		}
-		// Catch any exceptions that snuck their way up here.
-		catch (Exception e) {
+		} catch (Exception e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Fatal Exception!");
-			alert.setHeaderText("The program encountered an unexpected exception.");
+			alert.setHeaderText(
+					"The program encountered an unexpected exception.");
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 		}
@@ -60,16 +65,18 @@ public class MahjongApplication extends Application {
 	 * @param newRoot The new node to put in the window.
 	 * @param resizable Should the window be allowed to resize?
 	 */
-	public static void setRoot(Parent newRoot, boolean resizable) {
+	public static void setRoot(final Parent newRoot,
+	                           final boolean resizable) {
 		root = newRoot;
-		primary.setScene(new Scene(root, 300, 275));
+		primary.setScene(new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		primary.setResizable(resizable);
 		primary.setTitle("mahjong");
 	}
 
 	/**
-	 * Get the path to the file that the user wants to open. Stored here to be transferred
-	 * between NewMenuController and BoardMenuController.
+	 * Get the path to the file that the user wants to open.
+	 * Stored here to be transferred between
+	 * NewMenuController and BoardMenuController.
 	 * @return A string containing the file path.
 	 */
 	public static String getLoadFile() {
@@ -80,7 +87,7 @@ public class MahjongApplication extends Application {
 	 * Set the path to the file that the user has requested to open.
 	 * @param file A string containing the file path.
 	 */
-	public static void setLoadFile(String file) {
+	public static void setLoadFile(final String file) {
 		loadFile = file;
 	}
 
@@ -99,15 +106,16 @@ public class MahjongApplication extends Application {
 	 * @throws Exception Thrown when two games are launched.
 	 */
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		if (root != null)
+	public void start(final Stage primaryStage) throws Exception {
+		if (root != null) {
 			throw new Exception("Can't run two UI instances at once.");
+		}
 
 		primary = primaryStage;
 		root = FXMLLoader.load(getClass().getResource("NewMenu.fxml"));
 		primaryStage.setTitle("mahjong");
 		primaryStage.setResizable(false);
-		primaryStage.setScene(new Scene(root, 300, 275));
+		primaryStage.setScene(new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT));
 		// JavaFX can be funny about window closing.
 		primaryStage.setOnCloseRequest(e -> {
 			Platform.exit();

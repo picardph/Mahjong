@@ -19,14 +19,15 @@ public class UITile extends Box {
 	/**
 	 * Create a new visual tile. It will not be added to the visual board
 	 * state or to the underlying representation until manually done so.
-	 * @param tile The underlying tile to wrap up.
+	 * @param t The underlying tile to wrap up.
 	 * @throws FileNotFoundException Thrown when the texture can't be loaded.
 	 */
-	public UITile(Tile tile) throws FileNotFoundException {
-		this.tile = tile;
+	public UITile(final Tile t) throws FileNotFoundException {
+		tile = t;
 
 		PhongMaterial mat = new PhongMaterial();
-		mat.setDiffuseMap(new Image(new FileInputStream(getTileImagePath(tile))));
+		mat.setDiffuseMap(new Image(new FileInputStream(
+				getTileImagePath(tile))));
 		setMaterial(mat);
 	}
 
@@ -39,7 +40,7 @@ public class UITile extends Box {
 		return tile;
 	}
 
-	private static String getTileImagePath(Tile t) {
+	private static String getTileImagePath(final Tile t) {
 		// Map each tile to a file path to the image to represent that tile.
 		switch (t.getType()) {
 			case Ch1:
@@ -114,7 +115,7 @@ public class UITile extends Box {
 				return "images/spr_seasons_0.png";
 			case Flo:
 				return "images/spr_flowers_0.png";
-			default: // Really not possible but makes the compiler stop complaining.
+			default:
 				return "";
 		}
 	}
