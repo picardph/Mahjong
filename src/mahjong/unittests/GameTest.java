@@ -88,6 +88,11 @@ public class GameTest {
 		unGame.removeTiles(unGame.findMatch()[0], unGame.findMatch()[1]);
 		unGame.undo();
 		assertArrayEquals(unGame.getAllTiles(), tiles);
+		unGame.removeTiles(unGame.findMatch()[0], unGame.findMatch()[1]);
+		unGame.shuffle();
+		Tile[] tiles2 = unGame.getAllTiles();
+		unGame.undo();
+		assertArrayEquals(tiles2, unGame.getAllTiles());
 	}
 
 	@Test

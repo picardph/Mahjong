@@ -307,6 +307,7 @@ public class Game {
         ArrayList<Integer> shuffleIdents = new ArrayList<>();
         ArrayList<Tile> shuffleTiles = new ArrayList<>();
         Tile tempTile;
+        removedTiles.clear();
 
         // puts existing tile identifiers and Tiles into ArrayList
         for (i = 1; i < 145; i++) {
