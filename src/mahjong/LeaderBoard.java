@@ -91,6 +91,7 @@ public class LeaderBoard {
                 // if new time is less than stored time
                 if(time < Integer.parseInt(entry[1])){
                     insertEntry((name + "\t" + time), i);
+                    break;
                 }
 
             } else {
