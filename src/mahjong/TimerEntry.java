@@ -12,12 +12,11 @@ public class TimerEntry {
 	private static ITimeObserver observer = null;
 
 	/**
-	 * Resets the time to zero statically. Probably a bad design but
-	 * changing it would involve fixing a lot of older code.
+	 * Resets the time to a preset value.
 	 * @param inSec Starting seconds.
 	 * @param inMin Starting minutes.
 	 */
-	public TimerEntry(int inSec, int inMin) {
+	public static void set(int inSec, int inMin) {
 		seconds = inSec;
 		minutes = inMin;
 	}

@@ -55,8 +55,6 @@ public class BoardMenuController {
 		saveName = null;
 		// Get the file that was set during the new page process.
 		game = new Game(MahjongApplication.getLoadFile());
-		// Shuffle up the puzzle so it is not the same each time.
-		game.shuffle();
 		// Responsible for keeping track of the high scores.
 		leaders = new LeaderBoard();
 
@@ -79,7 +77,6 @@ public class BoardMenuController {
 
 		// Set the initial game board state.
 		setBoardTiles();
-
 		// Always reset the timer.
 		TimerEntry.reset();
 		// Change the title-bar to hold how much time has passed.
@@ -88,7 +85,7 @@ public class BoardMenuController {
 				// setObserver gets called on a separate thread. runLater will tell JavaFX to run
 				// this bit on the main event thread when possible as GUI changes can only be done
 				// there.
-				MahjongApplication.getPrimary().setTitle("Minutes: " + minutes + " Seconds: " + seconds);
+				MahjongApplication.getPrimary().setTitle("Minutes: " + TimerEntry.getMinutes() + " Seconds: " + TimerEntry.getSeconds());
 			});
 		});
 	}
@@ -121,8 +118,6 @@ public class BoardMenuController {
 		saveName = f.getAbsolutePath();
 		game = new Game(saveName);
 		setBoardTiles();
-
-		TimerEntry.reset();
 	}
 
 	/**
@@ -165,6 +160,15 @@ public class BoardMenuController {
 	 */
 	public void onExitClicked(ActionEvent actionEvent) {
 		System.exit(0);
+	}
+
+	/**
+	 * Called by JavaFX when the user selects the undo menu item.
+	 * @param actionEvent Relevant context data about the event.
+	 */
+	public void onUndoClicked(ActionEvent actionEvent) throws FileNotFoundException {
+		game.undo();
+		setBoardTiles();
 	}
 
 	/**
