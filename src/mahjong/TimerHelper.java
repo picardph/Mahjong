@@ -8,7 +8,7 @@ import java.util.Timer;
  * timer notify us when a second has passed rather than
  * pulling.
  */
-class TimerHelper extends TimerTask
+public class TimerHelper extends TimerTask
 {
 	/**
 	 * Will call our timer class and tell it
