@@ -18,7 +18,6 @@ import mahjong.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Optional;
-import java.util.Timer;
 
 /**
  * The board menu controller acts as the middle man between the actual

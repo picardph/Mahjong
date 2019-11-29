@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import mahjong.TimerHelper;
+
+import java.util.Timer;
 
 /**
  * The entry point for the application is here. It also holds a reference
@@ -20,6 +23,8 @@ public class MahjongApplication extends Application {
 	private static Stage primary = null;
 
 	private static String loadFile = null;
+	private static Timer timer = new Timer();
+	private static TimerHelper helper = new TimerHelper();
 
 	/**
 	 * The main entry point called by the Java VM when the program is launched.
@@ -27,6 +32,7 @@ public class MahjongApplication extends Application {
 	 */
 	public static void main(String[] args) {
 		try {
+			timer.schedule(helper, 1000, 1000);
 			// The launch method lets JavaFX take control of our core event loop.
 			launch(args);
 		}
