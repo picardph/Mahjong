@@ -26,8 +26,8 @@ public class Game {
     // Stack object to hold the tiles that the player has removed.
     private Stack<Tile> removedTiles;
 
-    private Timer timer;
-    private TimerHelper helper;
+    private static Timer timer = new Timer();
+    private static TimerHelper helper = new TimerHelper();
 
     /**
      * Creates a new game from the passed in template file.
@@ -39,6 +39,7 @@ public class Game {
         removedTiles = new Stack<Tile>();
         shufflesLeft = 5;
         loadGame(template);
+
         timer = new Timer();
         helper = new TimerHelper();
         timer.schedule(helper, 1000, 1000);
@@ -65,7 +66,7 @@ public class Game {
 
             String line = reader.readLine();
             positionInfo = line.split(",");
-            TimerEntry entry = new TimerEntry(Integer.parseInt(positionInfo[1]), Integer.parseInt(positionInfo[0]));
+            TimerEntry.set(Integer.parseInt(positionInfo[1]), Integer.parseInt(positionInfo[0]));
             shufflesLeft = Integer.parseInt(positionInfo[2]);
 
             // increments height
@@ -151,8 +152,12 @@ public class Game {
         board[x + 1][y + 1][z] = 0;
     }
 
-    private void undo() {
-    	for (int i = 0; i < 2; i++) {
+    /**
+     * Undos an operation that was done on the board. Will do nothing
+     * if no operation was done.
+     */
+    public void undo() {
+        for (int i = 0; i < 2; i++) {
 			Tile t = removedTiles.pop();
 
 			int x = t.getX();

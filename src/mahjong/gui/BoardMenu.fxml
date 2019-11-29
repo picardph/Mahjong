@@ -19,6 +19,7 @@
                     <MenuItem text="Exit" onAction="#onExitClicked"/>
                 </Menu>
                 <Menu text="Game">
+                    <MenuItem text="Undo" onAction="#onUndoClicked"/>
                     <MenuItem text="Shuffle" onAction="#onShuffleClicked"/>
                     <MenuItem text="Info" onAction="#onInfoClicked"/>
                     <MenuItem text="High Scores" onAction="#onHighScoresClicked"/>
