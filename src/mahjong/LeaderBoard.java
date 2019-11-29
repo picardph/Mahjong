@@ -59,7 +59,8 @@ public class LeaderBoard {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileout));
 
             for (int i = 0; i < winningTimes.length; i++) {
-                writer.write(winningTimes[i] + "\n");
+                if(winningTimes[i] != null && !winningTimes.equals("null"))
+                    writer.write(winningTimes[i] + "\n");
             }
 
             writer.close();
@@ -82,7 +83,7 @@ public class LeaderBoard {
         for(int i = 0; i < winningTimes.length; i++) {
 
             // check that current position is filled
-            if(winningTimes[i] != null) {
+            if(winningTimes[i] != null && !winningTimes[i].equals("null")) {
                 // get one entry from the array and split it
                 String[] entry = new String[2];
                 entry = winningTimes[i].split("\t");
@@ -94,6 +95,7 @@ public class LeaderBoard {
 
             } else {
                 winningTimes[i] = name + "\t" + time;
+                break;
             }
 
         }
