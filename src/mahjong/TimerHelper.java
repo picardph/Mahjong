@@ -8,13 +8,13 @@ import java.util.TimerTask;
  * pulling.
  */
 public class TimerHelper extends TimerTask {
-	/**
-	 * Will call our timer class and tell it
-	 * that a second has passed. This method
-	 * is called internally by Java.
-	 */
-	public void run() {
-		TimerEntry.incrementTimer();
-		TimerEntry.change();
-	}
+    /**
+     * Will call our timer class and tell it
+     * that a second has passed. This method
+     * is called internally by Java.
+     */
+    public void run() {
+        TimerEntry.incrementTimer();
+        TimerEntry.change();
+    }
 }

@@ -17,23 +17,23 @@ import java.util.Collections;
  */
 public class Game {
 
-	private final int xSize = 30;
-	private final int ySize = 16;
-	private final int zSize = 5;
-	private final int startShuffles = 5;
-	private final int tileCount = 144;
+    private final int xSize = 30;
+    private final int ySize = 16;
+    private final int zSize = 5;
+    private final int startShuffles = 5;
+    private final int tileCount = 144;
 
-	// Board Array
-	private int[][][] board;
+    // Board Array
+    private int[][][] board;
 
-	// Hashmap matches tile reference to a specific identifier
-	private HashMap<Integer, Tile> tileIdentifiers;
+    // Hashmap matches tile reference to a specific identifier
+    private HashMap<Integer, Tile> tileIdentifiers;
 
-	// Integer that holds the amount of shuffles the player can still use.
-	private int shufflesLeft;
+    // Integer that holds the amount of shuffles the player can still use.
+    private int shufflesLeft;
 
-	// Stack object to hold the tiles that the player has removed.
-	private Stack<Tile> removedTiles;
+    // Stack object to hold the tiles that the player has removed.
+    private Stack<Tile> removedTiles;
 
     /**
      * Creates a new game from the passed in template file.
@@ -47,30 +47,30 @@ public class Game {
         loadGame(template);
     }
 
-	private void loadGame(final String filein) {
+    private void loadGame(final String filein) {
 
-		// temporary Tile object
-		Tile tempTile;
+        // temporary Tile object
+        Tile tempTile;
 
-		// variables to increment for loops
-		int i;
-		int j;
+        // variables to increment for loops
+        int i;
+        int j;
         int k;
 
-		// String array stores information from 1 line of the file
-		String[] positionInfo;
+        // String array stores information from 1 line of the file
+        String[] positionInfo;
 
-		//creates scanner and an input stream
-		StringBuffer buffer = new StringBuffer();
+        //creates scanner and an input stream
+        StringBuffer buffer = new StringBuffer();
 
-		//reads in the information from the file
-		try {
+        //reads in the information from the file
+        try {
 
-		    final int xIndex = 0;
-		    final int yIndex = 1;
-		    final int zIndex = 2;
-		    final int idIndex = 3;
-		    final int typeIndex = 4;
+            final int xIndex = 0;
+            final int yIndex = 1;
+            final int zIndex = 2;
+            final int idIndex = 3;
+            final int typeIndex = 4;
 
             BufferedReader reader = new BufferedReader(new FileReader(filein));
 
@@ -138,30 +138,30 @@ public class Game {
         if (shufflesLeft == startShuffles + 1) {
             shuffle();
         }
-	}
+    }
 
     /**
      * Add a tile to the board. Make sure that you add another matching
      * tile otherwise the board will become unbeatable.
      * @param t The instance of the tile to add.
      */
-	public void addTile(final Tile t) {
-		int x = t.getX();
-		int y = t.getY();
-		int z = t.getZ();
-		int id = t.getIdent();
+    public void addTile(final Tile t) {
+        int x = t.getX();
+        int y = t.getY();
+        int z = t.getZ();
+        int id = t.getIdent();
 
-		board[x][y][z] = id;
-		board[x + 1][y][z] = id;
-		board[x][y + 1][z] = id;
-		board[x + 1][y + 1][z] = id;
+        board[x][y][z] = id;
+        board[x + 1][y][z] = id;
+        board[x][y + 1][z] = id;
+        board[x + 1][y + 1][z] = id;
 
-		tileIdentifiers.put(board[x][y][z], t);
-	}
+        tileIdentifiers.put(board[x][y][z], t);
+    }
 
-	private void removeTile(final Tile t) {
-    	// Add the tile to the removed tiles stack
-		removedTiles.push(t);
+    private void removeTile(final Tile t) {
+        // Add the tile to the removed tiles stack
+        removedTiles.push(t);
 
         int x = t.getX();
         int y = t.getY();
@@ -184,26 +184,26 @@ public class Game {
      */
     public void undo() {
         for (int i = 0; i < 2; i++) {
-			if (removedTiles.isEmpty()) {
+            if (removedTiles.isEmpty()) {
                 return;
             }
 
-			Tile t = removedTiles.pop();
+            Tile t = removedTiles.pop();
 
-			int x = t.getX();
-			int y = t.getY();
-			int z = t.getZ();
-			int ident = t.getIdent();
+            int x = t.getX();
+            int y = t.getY();
+            int z = t.getZ();
+            int ident = t.getIdent();
 
-			board[x][y][z] = ident;
-			board[x + 1][y][z] = ident;
-			board[x][y + 1][z] = ident;
-			board[x + 1][y + 1][z] = ident;
+            board[x][y][z] = ident;
+            board[x + 1][y][z] = ident;
+            board[x][y + 1][z] = ident;
+            board[x + 1][y + 1][z] = ident;
 
-			tileIdentifiers.put(board[x][y][z], t);
-		}
+            tileIdentifiers.put(board[x][y][z], t);
+        }
 
-	}
+    }
 
     /**
      * Takes the board and game state and outputs it to a text file in
@@ -449,18 +449,18 @@ public class Game {
      * game is won, lost, in progress, etc.
      * @return The state of the game.
      */
-	public GameState getGameState() {
-		if (tileIdentifiers.isEmpty() && !removedTiles.isEmpty()) {
+    public GameState getGameState() {
+        if (tileIdentifiers.isEmpty() && !removedTiles.isEmpty()) {
             return GameState.Won;
         }
-		if (findMatch() == null && shufflesLeft == 0) {
+        if (findMatch() == null && shufflesLeft == 0) {
             return GameState.Lost;
         }
-		if (findMatch() == null && shufflesLeft > 0) {
+        if (findMatch() == null && shufflesLeft > 0) {
             return GameState.Stuck;
         }
-		return GameState.InProgress;
-	}
+        return GameState.InProgress;
+    }
 
     /**
      * Get the number of shuffles the user has left. Each game
