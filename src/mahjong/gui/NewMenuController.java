@@ -14,45 +14,45 @@ import java.util.Objects;
  * some information passed in by the FXML file.
  */
 public class NewMenuController {
-	@FXML
-	private ListView list;
+    @FXML
+    private ListView list;
 
-	private static final int WIDTH = 300;
-	private static final int HEIGHT = 275;
+    private static final int WIDTH = 300;
+    private static final int HEIGHT = 275;
 
-	/**
-	 * Called by the FXML file when we should put the GUI into
-	 * the starting state. This should not be called manually.
-	 * It is only public because the FXML file needs access
-	 * to it.
-	 */
-	@FXML
-	public void initialize() {
-		MahjongApplication.getPrimary().setWidth(WIDTH);
-		MahjongApplication.getPrimary().setHeight(HEIGHT);
+    /**
+     * Called by the FXML file when we should put the GUI into
+     * the starting state. This should not be called manually.
+     * It is only public because the FXML file needs access
+     * to it.
+     */
+    @FXML
+    public void initialize() {
+        MahjongApplication.getPrimary().setWidth(WIDTH);
+        MahjongApplication.getPrimary().setHeight(HEIGHT);
 
-		// Find all the puzzle files to read in.
-		for (File f : Objects.requireNonNull((
-				new File("Puzzles")).listFiles())) {
-			list.getItems().add(f.getName());
-		}
-	}
+        // Find all the puzzle files to read in.
+        for (File f : Objects.requireNonNull((
+                new File("Puzzles")).listFiles())) {
+            list.getItems().add(f.getName());
+        }
+    }
 
-	/**
-	 * Called by FXML when the user selects the start button. The code
-	 * will look at which puzzle was selected, pass that information
-	 * on, and the load the actual game board class.
-	 * @param actionEvent Relevant context data about the event.
-	 * @throws Exception Thrown when the loading fails.
-	 */
-	public void startClicked(final ActionEvent actionEvent) throws Exception {
-		String path = "Puzzles/" + list.getSelectionModel()
-				.getSelectedItem();
-		if (list.getSelectionModel().getSelectedItem() != null
-				&& (new File(path)).exists()) {
-			MahjongApplication.setLoadFile(path);
-			MahjongApplication.setRoot(FXMLLoader.load(getClass()
-					.getResource("BoardMenu.fxml")), false);
-		}
-	}
+    /**
+     * Called by FXML when the user selects the start button. The code
+     * will look at which puzzle was selected, pass that information
+     * on, and the load the actual game board class.
+     * @param actionEvent Relevant context data about the event.
+     * @throws Exception Thrown when the loading fails.
+     */
+    public void startClicked(final ActionEvent actionEvent) throws Exception {
+        String path = "Puzzles/" + list.getSelectionModel()
+                .getSelectedItem();
+        if (list.getSelectionModel().getSelectedItem() != null
+                && (new File(path)).exists()) {
+            MahjongApplication.setLoadFile(path);
+            MahjongApplication.setRoot(FXMLLoader.load(getClass()
+                    .getResource("BoardMenu.fxml")), false);
+        }
+    }
 }

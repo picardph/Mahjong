@@ -1,6 +1,10 @@
 package mahjong;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.util.Scanner;
 
 /**
@@ -23,7 +27,7 @@ public class LeaderBoard {
 
 
     // loads the leaderboard from a file to the array
-    private void loadLeaderBoard(String fileIn) {
+    private void loadLeaderBoard(final String fileIn) {
 
         try {
 
@@ -35,9 +39,9 @@ public class LeaderBoard {
             int i = 0;
 
             // checks for EOF
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 // error check: file larger than array
-                if(i < winningTimes.length){
+                if (i < winningTimes.length) {
                     winningTimes[i] = scanner.nextLine();
                     i++;
                 }
@@ -52,14 +56,15 @@ public class LeaderBoard {
 
 
     // saves the leaderboard information to a .txt file
-    private void saveLeaderBoard(String fileout) {
+    private void saveLeaderBoard(final String fileout) {
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileout));
 
             for (int i = 0; i < winningTimes.length; i++) {
-                if(winningTimes[i] != null && !winningTimes.equals("null"))
+                if (winningTimes[i] != null && !winningTimes.equals("null")) {
                     writer.write(winningTimes[i] + "\n");
+                }
             }
 
             writer.close();
@@ -75,20 +80,21 @@ public class LeaderBoard {
      * @param name The name of the user.
      * @param fileIn The file to save the resulting board into.
      */
-    public void updateLeaderBoard(int time, String name, String fileIn) {
+    public void updateLeaderBoard(final int time, final String name,
+                                  final String fileIn) {
         loadLeaderBoard(fileIn);
 
         // some comparison code
-        for(int i = 0; i < winningTimes.length; i++) {
+        for (int i = 0; i < winningTimes.length; i++) {
 
             // check that current position is filled
-            if(winningTimes[i] != null && !winningTimes[i].equals("null")) {
+            if (winningTimes[i] != null && !winningTimes[i].equals("null")) {
                 // get one entry from the array and split it
                 String[] entry = new String[2];
                 entry = winningTimes[i].split("\t");
 
                 // if new time is less than stored time
-                if(time < Integer.parseInt(entry[1])){
+                if (time < Integer.parseInt(entry[1])) {
                     insertEntry((name + "\t" + time), i);
                     break;
                 }
@@ -106,10 +112,10 @@ public class LeaderBoard {
 
 
     // inserts an entry into the leaderboard and adjusts the array accordingly
-    private void insertEntry(String entry, int index) {
+    private void insertEntry(final String entry, final int index) {
 
-        for(int i = winningTimes.length-1; i > index; i--){
-            winningTimes[i] = winningTimes[i-1];
+        for (int i = winningTimes.length - 1; i > index; i--) {
+            winningTimes[i] = winningTimes[i - 1];
         }
 
         winningTimes[index] = entry;
@@ -124,15 +130,15 @@ public class LeaderBoard {
      */
     public int size() {
 
-        int size = 0;
+        int len = 0;
 
-        for(int i = 0; i < winningTimes.length; i++) {
-            if(winningTimes[i] != null){
-                size++;
+        for (int i = 0; i < winningTimes.length; i++) {
+            if (winningTimes[i] != null) {
+                len++;
             }
         }
 
-        return size;
+        return len;
     }
 
     /**
@@ -140,7 +146,7 @@ public class LeaderBoard {
      * @param pos The position (0 to 9) to look at.
      * @return A string holding entry information.
      */
-    public String entryAtPosition(int pos) {
+    public String entryAtPosition(final int pos) {
         return winningTimes[pos];
     }
 

@@ -8,12 +8,15 @@ package mahjong;
  * boolean is not enough to track the state of the game.
  */
 public enum GameState {
-    /** When the game is currently being played and there are still tiles to remove. */
+    /** When the game is currently being played
+     * and there are still tiles to remove. */
     InProgress,
     /** When all tiles have been removed. */
     Won,
-    /** When there are no more tiles to remove and the user is out of shuffles. */
+    /** When there are no more tiles to remove and the user
+     * is out of shuffles. */
     Lost,
-    /** When there are no more tiles to remove but the user has shuffles left. */
+    /** When there are no more tiles to remove but the user
+     * has shuffles left. */
     Stuck
 }
