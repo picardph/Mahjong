@@ -1,11 +1,19 @@
 package mahjong.unittests;
 
-import mahjong.*;
+import mahjong.Game;
+import mahjong.Tile;
+import mahjong.TimerEntry;
+import mahjong.GameState;
+import mahjong.TileType;
 import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class GameTest {
 	@Test(expected = IllegalArgumentException.class)
