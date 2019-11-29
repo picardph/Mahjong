@@ -1,13 +1,10 @@
 package mahjong.unittests;
 
-import mahjong.Game;
-import mahjong.Tile;
-import mahjong.TimerEntry;
-import mahjong.GameState;
-import mahjong.TileType;
+import mahjong.*;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Timer;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertEquals;
@@ -28,6 +25,10 @@ public class GameTest {
 
     @Test
     public void gameConstructorTest() throws InterruptedException {
+        Timer timer = new Timer();
+        TimerHelper helper = new TimerHelper();
+        timer.schedule(helper, 1000, 1000);
+
         Game constGame = new Game("Puzzles\\defaultPuzzle.txt");
         assertNotEquals(0, constGame.getAllTiles().length);
         Thread.sleep(2000);
