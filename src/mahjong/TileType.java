@@ -5,10 +5,8 @@ package mahjong;
  * of tiles that are possible on the board.
  */
 public enum TileType {
-	// These are the names of the types of tiles in our game
-
 	/********************************
-	 * These are the character tiles
+	 * These are the character tiles.
 	 ********************************/
 	Ch1,
 	Ch2,
@@ -21,7 +19,7 @@ public enum TileType {
 	Ch9,
 
 	/********************************
-	 * These are the bamboo tiles
+	 * These are the bamboo tiles.
 	 ********************************/
 	Bam1,
 	Bam2,
@@ -34,7 +32,7 @@ public enum TileType {
 	Bam9,
 
 	/********************************
-	 * These are the circle tiles
+	 * These are the circle tiles.
 	 ********************************/
 	Cir1,
 	Cir2,
@@ -47,14 +45,14 @@ public enum TileType {
 	Cir9,
 
 	/********************************
-	 * These are the dragon tiles
+	 * These are the dragon tiles.
 	 ********************************/
 	Dra1,
 	Dra2,
 	Dra3,
 
 	/********************************
-	 * These are the wind tiles
+	 * These are the wind tiles.
 	 ********************************/
 	Wind1,
 	Wind2,
@@ -62,7 +60,7 @@ public enum TileType {
 	Wind4,
 
 	/********************************
-	 * These are the season and flower tiles
+	 * These are the season and flower tiles.
 	 ********************************/
 	Sea,
 	Flo

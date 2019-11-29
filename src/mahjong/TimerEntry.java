@@ -5,18 +5,23 @@ package mahjong;
  * for. Not able to record times over 59 minutes as it does not track
  * hours.
  */
-public class TimerEntry {
+public final class TimerEntry {
 
 	private static int seconds = 0;
 	private static int minutes = 0;
 	private static ITimeObserver observer = null;
+
+	private static final int SECONDS = 60;
+
+	private TimerEntry() {
+	}
 
 	/**
 	 * Resets the time to a preset value.
 	 * @param inSec Starting seconds.
 	 * @param inMin Starting minutes.
 	 */
-	public static void set(int inSec, int inMin) {
+	public static void set(final int inSec, final int inMin) {
 		seconds = inSec;
 		minutes = inMin;
 	}
@@ -43,12 +48,12 @@ public class TimerEntry {
 	 * it counts it as a minute while resetting the seconds.
 	 */
 	public static void incrementTimer() {
-		if (seconds == 59) {
+		if (seconds == SECONDS - 1) {
 			minutes++;
 			seconds = 0;
-		}
-		else
+		} else {
 			seconds++;
+		}
 	}
 
 	/**
@@ -63,7 +68,7 @@ public class TimerEntry {
 	 * Set the observer that will be called whenever a second passes.
 	 * @param obs The new observer to call.
 	 */
-	public static void setObserver(ITimeObserver obs) {
+	public static void setObserver(final ITimeObserver obs) {
 		observer = obs;
 	}
 
@@ -72,7 +77,8 @@ public class TimerEntry {
 	 * that the observer is notified.
 	 */
 	public static void change() {
-		if (observer != null)
+		if (observer != null) {
 			observer.second(minutes, seconds);
+		}
 	}
 }

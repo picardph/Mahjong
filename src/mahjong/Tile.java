@@ -1,8 +1,9 @@
 package mahjong;
 
 /**
- * Represents a single Mahjong tile. Each tile is of a class (wind, flower, character, etc.)
- * and of a certain type (the specific kind of tile it is). Both must be matching for a tile
+ * Represents a single Mahjong tile.
+ * Each tile is of a class (wind, flower, character, etc.) and of a certain
+ * type (the specific kind of tile it is). Both must be matching for a tile
  * to be a match. Each tile is 2x2 in size.
  */
 public class Tile {
@@ -27,10 +28,14 @@ public class Tile {
 	 * @param tileType The specific type of tile that this is.
 	 * @throws IllegalArgumentException Thrown when an input is out of range
 	 */
-	public Tile(int xcoord, int ycoord, int zcoord, int identifier, TileType tileType) {
-		if (xcoord < -1 || xcoord > xSize || ycoord < -1 || ycoord > ySize || zcoord < -1
-				|| zcoord > zSize || identifier < 0 || identifier > maxIndentifier)
+	public Tile(final int xcoord, final int ycoord, final int zcoord,
+	            final int identifier, final TileType tileType) {
+		if (xcoord < -1 || xcoord > xSize || ycoord < -1
+				|| ycoord > ySize || zcoord < -1
+				|| zcoord > zSize || identifier < 0
+				|| identifier > maxIndentifier) {
 			throw new IllegalArgumentException("Input out of range");
+		}
 
 		x    = xcoord;
 		y    = ycoord;
@@ -49,13 +54,14 @@ public class Tile {
 
 	/**
 	 * Set the x coordinate of the top-left corner.
-	 * @param x The x coordinate.
+	 * @param newX The x coordinate.
 	 * @throws IllegalArgumentException Thrown when the input is out of range
 	 */
-	public void setX(int x) {
-		if (x < -1 || x > xSize)
+	public void setX(final int newX) {
+		if (newX < -1 || newX > xSize) {
 			throw new IllegalArgumentException("Input out of range");
-		this.x = x;
+		}
+		x = newX;
 	}
 
 	/**
@@ -68,13 +74,14 @@ public class Tile {
 
 	/**
 	 * Set the y coordinate of the top-left corner.
-	 * @param y The y coordinate.
+	 * @param newY The y coordinate.
 	 * @throws IllegalArgumentException Thrown when the input is out of range
 	 */
-	public void setY(int y) {
-		if (y < -1 || y > ySize)
+	public void setY(final int newY) {
+		if (newY < -1 || newY > ySize) {
 			throw new IllegalArgumentException("Input out of range");
-		this.y = y;
+		}
+		y = newY;
 	}
 
 	/**
@@ -87,13 +94,14 @@ public class Tile {
 
 	/**
 	 * Set the depth (z coordinate) of the tile.
-	 * @param z The z coordinate.
+	 * @param newZ The z coordinate.
 	 * @throws IllegalArgumentException Thrown when the input is out of range
 	 */
-	public void setZ(int z) {
-		if (z < -1 || z > zSize)
+	public void setZ(final int newZ) {
+		if (newZ < -1 || newZ > zSize) {
 			throw new IllegalArgumentException("Input out of range");
-		this.z = z;
+		}
+		z = newZ;
 	}
 
 	/**
@@ -107,10 +115,10 @@ public class Tile {
 	/**
 	 * Change the kind of tile that this is. Be careful that there
 	 * is a matching pair as well or the board will be unbeatable.
-	 * @param type The new type of tile.
+	 * @param newType The new type of tile.
 	 */
-	public void setType(TileType type) {
-		this.type = type;
+	public void setType(final TileType newType) {
+		type = newType;
 	}
 
 	/**
@@ -123,12 +131,13 @@ public class Tile {
 
 	/**
 	 * Change the uniquely identifying number.
-	 * @param ident The new identifier.
+	 * @param newIdent The new identifier.
 	 * @throws IllegalArgumentException Thrown when the input is out of range
 	 */
-	public void setIdent(int ident) {
-		if (ident < 0 || ident > maxIndentifier)
+	public void setIdent(final int newIdent) {
+		if (newIdent < 0 || newIdent > maxIndentifier) {
 			throw new IllegalArgumentException("Input out of range");
-		this.ident = ident;
+		}
+		ident = newIdent;
 	}
 }
