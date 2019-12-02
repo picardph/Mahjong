@@ -1,3 +1,431 @@
+commit 3b14a258d5921d392315cea421b42818c0ade3f9
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 17:39:59 2019 -0500
+
+    Added better error checking.
+
+commit 9b8f8eb92c3c2e9c9b2424289100f31cc19c2e0c
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 17:07:37 2019 -0500
+
+    Updated UML diagram.
+
+commit a5b90b2d1965bfcd847dcfbf2d4c9f6f8f28d0df
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 16:13:08 2019 -0500
+
+    Fixed unit test.
+
+commit dec8953768a9eec7788f06bb49cd6ada9a650ec5
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 15:59:16 2019 -0500
+
+    Fixed indent problems.
+
+commit 63044f6eae5468f00204fbae5d264c11005deaa2
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 15:40:33 2019 -0500
+
+    Somemore checkstyle.
+
+commit 84d70efb4c05a493391d2c4faca3fc3bdc598d04
+Merge: 786bb00 8f5f205
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 15:34:46 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       Mahjong.iml
+
+commit 786bb008694570e75fe191810036912529359f10
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 15:33:58 2019 -0500
+
+    Fixed rest of checkstyle.
+
+commit 8f5f2051439bccc2aff990e3b8538356457c13fa
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 14:43:59 2019 -0500
+
+    Removed project file
+
+commit 1f5b31f0d5e16a1ab245799c2163e546f177b05b
+Merge: 0754f4e 47979c3
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 14:34:31 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 0754f4e9fcb5ce7edb5784c8805edd16ed203119
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 14:34:01 2019 -0500
+
+    Fixed checkstyle in GUI package.
+
+commit 47979c3061c7d1e51d18a87c69944392b008bce7
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Fri Nov 29 14:09:22 2019 -0500
+
+    fixed leaderboard so no error is thrown if a file doesn't already exist
+
+commit 221ac75c58af4ec34cd5913ccfa6d9f07c94160b
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Fri Nov 29 13:24:28 2019 -0500
+
+    Another fix to undo
+
+commit 8821a3e80678c41233c60e02113a18a93493bce9
+Merge: 60ae630 d77e42b
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Fri Nov 29 13:17:02 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 60ae63000786d6e30e57eeb7d4aa85c1fea1f0c3
+Merge: 2a5a6dd 5b9eabf
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Fri Nov 29 13:16:58 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       src/mahjong/Game.java
+
+commit d77e42bae5bd23635f55b2f779bb16b177b9557f
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 13:14:12 2019 -0500
+
+    Fixed timer issue.
+
+commit 2a5a6dd1b5af8f54720eab6a25bd9f4c548e7ea7
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Fri Nov 29 13:09:55 2019 -0500
+
+    Fix to undo, updated tests
+
+commit 5b9eabfc3581a94407eed3aedbed4a2fbd0d6b30
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 12:54:08 2019 -0500
+
+    Fixed static issues with the timer and added the undo to the GUI.
+
+commit 56919fea078d2747705786f99a80c41003331e3d
+Merge: 3a6b7f4 10bbf73
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Fri Nov 29 12:03:50 2019 -0500
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
+commit 10bbf7309ddbfbdd3c09627c89956f6417e968be
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Thu Nov 28 23:38:39 2019 -0500
+
+    leaderboard now works correctly and the third puzzle is added
+
+commit 0e522ff57a6e8245973259b65c1a152aebd618b9
+Merge: 99a96fa a3453a7
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Thu Nov 28 23:05:42 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 99a96faac8d139ae582b3b7251ace052ddf3d577
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Thu Nov 28 23:05:23 2019 -0500
+
+    fixed test file
+
+commit 3a6b7f4f2ce416de5a1233fb1d8ed8261c781f12
+Merge: fe5b3ea a3453a7
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Thu Nov 28 19:05:27 2019 -0500
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
+commit a3453a7bae40e256fa2714caca16c6fdedcc4741
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Thu Nov 28 16:27:38 2019 -0500
+
+    Fixed timer display.
+
+commit fe5b3ea48d9a42f03a9c6fd51a915f4e9af61319
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Wed Nov 27 18:01:54 2019 -0500
+
+    Re-pushing to sync our files
+
+commit 0df0466c823b29404c009eaddd1a04c3edc48668
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Wed Nov 27 17:46:57 2019 -0500
+
+    Working on the leaderboard and added a proper hookup so that the GUI can display the time (disabled for now).
+
+commit 3a0f26f0310b7eba2b2e71710aa8f14ea563fdb0
+Merge: bcf52dc b235549
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 25 17:55:31 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       src/mahjong/Game.java
+    #       src/mahjong/unittests/GameTest.java
+
+commit bcf52dc4ba78c565d1200794d8de953c3ead700b
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 25 17:49:25 2019 -0500
+
+    Updated test file and test templates
+
+commit b235549e4bd887c1353cac6c1b095837da7c7cde
+Merge: 0b8be88 47be8b4
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 25 17:39:10 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 0b8be882ee7b7b52a33167baf0b6446952ef068d
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 25 17:38:52 2019 -0500
+
+    Added last bit of JavaDoc.
+
+commit 47be8b4425742be0e1411c60ef8e837535a9d6ea
+Merge: 8283aec fb06be3
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Nov 25 17:24:34 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 8283aec6650dcae44c964aaca3998f8da8de8c67
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Nov 25 17:23:26 2019 -0500
+
+    added error testing to load class
+
+commit fb06be3f77182bbe1dfc071da12f98c4035c7dab
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 25 16:55:07 2019 -0500
+
+    Small improvements.
+
+commit 9f76d53bde3a3f2e0d0d73cdc050da7745cbd9af
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 25 14:14:06 2019 -0500
+
+    Added JavaDoc to everything but the TimerEntry and TimerHelper.
+
+commit 6b1fecc5e80cff580f2077d015fffdb901a4013c
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 25 13:29:36 2019 -0500
+
+    Improved the source code and added some JavaDoc.
+
+commit 55912c93bd7045707c36354910f8bba23e5bfe06
+Merge: 710757f 980d5f3
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Sun Nov 24 17:57:13 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 710757f90251074eb797466c558580294c84df92
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Sun Nov 24 17:56:07 2019 -0500
+
+    Added test classes and new test puzzle template
+
+commit 980d5f3913bdd9143d6191ec83567bbe6861190a
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Thu Nov 21 19:53:07 2019 -0500
+
+    second puzzle file
+
+commit 387a8e188fbad6ff7c6e6334ee0882c207974a77
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Thu Nov 21 13:18:38 2019 -0500
+
+    Fixed bug in findMatch.
+
+commit b59eb176c80488866cc97f711b4d2b58d7c6c73c
+Merge: dc10b5a 4fbdef0
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Thu Nov 21 13:16:20 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit dc10b5a8010d6bb306396a9e01f22700d3de8fc9
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Thu Nov 21 13:15:47 2019 -0500
+
+    Fixed findMatch (I'm an idiot)
+
+commit 4fbdef00c9856fca43fb6d4df53f9d2c209a9c57
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Thu Nov 21 12:07:40 2019 -0500
+
+    Added JavaDoc to the GUI package.
+
+commit 40515a7106f3b4ee52fffbd73fa2bffb080e34d3
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Thu Nov 21 11:27:21 2019 -0500
+
+    Added GUI code for displaying hints.
+
+commit ed4111664c23b6cf41fe7bc088c1fb4f39b24f62
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Thu Nov 21 11:10:29 2019 -0500
+
+    Removed unused method from game class, fixed new game resizing the window, and added leader board window.
+
+commit ddc686dad432725f03fca70f9eca133dce496095
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Wed Nov 20 20:49:47 2019 -0500
+
+    Fixed programming continuing to run after window was closed. Fixed bug in showing the game info. Fixed bug in the GUI that caused it to show the wrong window.
+
+commit 8315843cd16b48f2e8c8d5c720553cad5100ed11
+Merge: 5fbd613 9d0c555
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Wed Nov 20 20:38:38 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       Mahjong.iml
+
+commit 5fbd6136db0d584f48f4445f84358147adb9d5fe
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Wed Nov 20 20:38:03 2019 -0500
+
+    Fixed small error/typo.
+
+commit 9d0c555fb53f69a0e581ab6f5ec3184fc9b96aa0
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Tue Nov 19 21:12:13 2019 -0500
+
+    untested leaderboard class
+
+commit cb6f04118e0e7ac6bc3230bcf578c655f2d16fbe
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Tue Nov 19 21:11:01 2019 -0500
+
+    time now saves and loads from game files
+
+commit 23477e15eed02fe925a7d8403fbb67c41d83dc8f
+Merge: 6e8f3b7 4563590
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Tue Nov 19 19:51:07 2019 -0500
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
+commit 4563590c184b0797d30a0077a4d2010e55a17fca
+Merge: 00d77bd f8fcbe8
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 18 21:07:02 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 00d77bde3d6e66ae3a0bc8d743dc17409bceb113
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 18 21:06:46 2019 -0500
+
+    Fixed small error.
+
+commit 9b699f3fb90076f87d88205c4a8f7ca132aea163
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 18 21:06:27 2019 -0500
+
+    Fixed 3D graphics and GUI. Should all be working now.
+
+commit f8fcbe84170cbcb3d64c8cb7e63f6d89762ff755
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 18 18:58:49 2019 -0500
+
+    Added test directory.
+
+commit 60c99c70d1192b01ed93b9cdf26127b45e8ebf79
+Merge: 3f531c0 dc433d8
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 18 18:41:39 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 3f531c048e98496cf115b01cfc86d7174a95be8e
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 18 18:40:53 2019 -0500
+
+    Added timer functionality and timer helper classes
+
+commit dc433d89eff7110a2854e02320bcaae1f0aed58e
+Merge: b4f42c3 44044e0
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 18 18:26:05 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit b4f42c3a46996dde8e8fa3b94e8e7b42a523c07c
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Nov 18 18:25:38 2019 -0500
+
+    The complete 3D board now loads in.
+
+commit 44044e0ea8fba34f90a5afa71768aa883d6d07dc
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 18 17:15:45 2019 -0500
+
+    Removed incorrect files
+
+commit 46b931e7dfa8df9d52a699eb232e34b76fd40ff2
+Merge: 882b941 84be7c9
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 18 17:11:07 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 882b941f01f95ec5e370c0db62d83e6adfcda6c3
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Mon Nov 18 17:10:28 2019 -0500
+
+    Reuploaded old GUI code
+
+commit 6e8f3b7f8073efce5bacb4772070a9a0680f7a3a
+Merge: 84be7c9 3b7230a
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Sun Nov 17 16:49:14 2019 -0500
+
+    Merge branch 'release1' of https://github.com/picardph/Mahjong
+
+commit 84be7c924e94a2853a8089f7a6efda7b0e33a62b
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Sun Nov 17 15:42:56 2019 -0500
+
+    Add graphics to use for UV mapping the cubes.
+
+commit de720381a87d9b2c7a9f7ed3d591087f2fd85779
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Sun Nov 17 15:30:30 2019 -0500
+
+    Started rewriting GUI to handle 3D.
+
+commit 50e39cfbf45a278595e97981678c9c6018254045
+Author: SamIsaacs <sjsisaacs@gmail.com>
+Date:   Thu Nov 14 14:30:27 2019 -0500
+
+    Added undo functionality and addTile function.
+
+commit d10bc261f9e88b0b6b6fce3b61e891ea3d8bf263
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Nov 11 22:17:40 2019 -0500
+
+    number of shuffles now save, fixed magic numbers
+
+commit 3b7230a2080677508b74f36946416fbba1179630
+Author: picardph <37383062+picardph@users.noreply.github.com>
+Date:   Wed Oct 23 20:23:01 2019 -0400
+
+    Added the log file of our last git operations.
+
 commit 9ff997273d231026ca8e79209a97886edea535d0
 Author: picardph <37383062+picardph@users.noreply.github.com>
 Date:   Mon Oct 21 20:20:28 2019 -0400
