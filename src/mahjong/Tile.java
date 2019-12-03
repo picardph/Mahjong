@@ -30,8 +30,8 @@ public class Tile {
      */
     public Tile(final int xcoord, final int ycoord, final int zcoord,
                 final int identifier, final TileType tileType) {
-        if (xcoord < -1 || xcoord > xSize || ycoord < -1
-                || ycoord > ySize || zcoord < -1
+        if (xcoord < 0 || xcoord > xSize || ycoord < 0
+                || ycoord > ySize || zcoord < 0
                 || zcoord > zSize || identifier < 0
                 || identifier > maxIndentifier) {
             throw new IllegalArgumentException("Input out of range");

@@ -74,7 +74,7 @@ public class TileTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void badMutatorTest1() {
-        t.setX(-1);
+        t.setX(-2);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -84,7 +84,7 @@ public class TileTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void badMutatorTest3() {
-        t.setY(-1);
+        t.setY(-2);
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -94,7 +94,7 @@ public class TileTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void badMutatorTest5() {
-        t.setZ(-1);
+        t.setZ(-2);
     }
 
     @Test (expected = IllegalArgumentException.class)
