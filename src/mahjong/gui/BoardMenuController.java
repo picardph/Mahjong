@@ -80,10 +80,16 @@ public class BoardMenuController {
         try {
             // Get the file that was set during the new page process.
             game = new Game(MahjongApplication.getLoadFile());
-            // Responsible for keeping track of the high scores.
-            leaders = new LeaderBoard();
         } catch (RuntimeException e) {
             showError("Failed to load the game file.");
+        }
+
+        // Responsible for keeping track of the high scores.
+        leaders = new LeaderBoard();
+        try {
+            leaders.loadLeaderBoard("leaderboard.txt");
+        } catch (RuntimeException e) {
+            showError("Failed to load the leader board data.");
         }
 
         root = new Group();
@@ -388,15 +394,16 @@ public class BoardMenuController {
 
         Optional<String> result = textAlert.showAndWait();
         // Only enter a name to the high score leader if a name was entered.
-        try {
-            result.ifPresent(s ->
-                    leaders.updateLeaderBoard(
-                            (TimerEntry.getMinutes() * SECONDS)
-                                    + TimerEntry.getSeconds(),
-                            s, "leaderboard.txt"));
-        } catch (RuntimeException e) {
-            showError("Failed to load the leader boards file.");
-        }
+        result.ifPresent(s -> {
+            try {
+                leaders.updateLeaderBoard(
+                        (TimerEntry.getMinutes() * SECONDS)
+                                + TimerEntry.getSeconds(),
+                        s, "leaderboard.txt");
+            } catch (RuntimeException e) {
+                showError("Failed to load the leader boards file.");
+            }
+        });
     }
 
     private void lost() {

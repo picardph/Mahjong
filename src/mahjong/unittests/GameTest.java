@@ -120,5 +120,6 @@ public class GameTest {
         assertTrue(vtGame.isValidTile(t1));
         assertFalse(vtGame.isValidTile(t4));
         assertFalse(vtGame.isValidTile(t5));
+        assertFalse(vtGame.isValidTile(null));
     }
 }

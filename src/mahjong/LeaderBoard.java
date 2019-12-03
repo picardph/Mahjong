@@ -25,9 +25,11 @@ public class LeaderBoard {
         winningTimes = new String[size];
     }
 
-
-    // loads the leaderboard from a file to the array
-    private void loadLeaderBoard(final String fileIn) {
+    /**
+     * Loads the leader board information from a text file.
+     * @param fileIn The path to the file to load.
+     */
+    public void loadLeaderBoard(final String fileIn) {
 
         try {
 
