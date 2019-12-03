@@ -1,3 +1,22 @@
+commit 494b19df45ad893163054fb2719592c1326addf1
+Merge: cc9390a b149a68
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Dec 2 22:50:55 2019 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit cc9390a9cf45708a908eedb4791c69d9b739c37e
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Dec 2 22:50:31 2019 -0500
+
+    Improved the testing, removed unused method from game, improved leaderboard docs.
+
+commit b149a68939ad72a352deff2b451fe3f3dcb2e778
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Mon Dec 2 22:15:47 2019 -0500
+
+    Updated git logs.
+
 commit f9a14b527200857b5b515e69ed63b2010dd18881
 Author: gonserr <gonserr@mail.gvsu.edu>
 Date:   Mon Dec 2 21:54:19 2019 -0500
