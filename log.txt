@@ -1,3 +1,36 @@
+commit f9a14b527200857b5b515e69ed63b2010dd18881
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Dec 2 21:54:19 2019 -0500
+
+    fixed unit tests
+
+commit 39fe13c8f30a33fb5b355beb7edc7123959c51bb
+Merge: ed7ac5b 60cd570
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Mon Dec 2 00:55:36 2019 -0500
+
+    Merge branch 'final-release' of https://github.com/picardph/Mahjong
+
+commit 60cd5707ff747daca0846c2778615d4f9ba28612
+Author: Philip Picard <emailmeforfreeipad@gmail.com>
+Date:   Fri Nov 29 20:50:00 2019 -0500
+
+    Updated Git log.
+
+commit ed7ac5b83b168f75cb5a5b0e18aae0cf3835d15d
+Merge: e50e7d5 3b14a25
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Fri Nov 29 17:50:05 2019 -0500
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
+commit e50e7d55944bf96602d029658f5a85f49e8f7ff9
+Merge: 4810d1b 9b8f8eb
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Fri Nov 29 17:41:00 2019 -0500
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
 commit 3b14a258d5921d392315cea421b42818c0ade3f9
 Author: Philip Picard <emailmeforfreeipad@gmail.com>
 Date:   Fri Nov 29 17:39:59 2019 -0500
@@ -10,17 +43,37 @@ Date:   Fri Nov 29 17:07:37 2019 -0500
 
     Updated UML diagram.
 
+commit 4810d1bb1164acfde36ade100d5ffe3446f8c203
+Merge: 9b4464a a5b90b2
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Fri Nov 29 16:18:17 2019 -0500
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
 commit a5b90b2d1965bfcd847dcfbf2d4c9f6f8f28d0df
 Author: Philip Picard <emailmeforfreeipad@gmail.com>
 Date:   Fri Nov 29 16:13:08 2019 -0500
 
     Fixed unit test.
 
+commit 9b4464ad0af9c068c53bdb57d13214583ba059bf
+Merge: 4c9d618 dec8953
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Fri Nov 29 16:03:20 2019 -0500
+
+    Merge branch 'master' of https://github.com/picardph/Mahjong
+
 commit dec8953768a9eec7788f06bb49cd6ada9a650ec5
 Author: Philip Picard <emailmeforfreeipad@gmail.com>
 Date:   Fri Nov 29 15:59:16 2019 -0500
 
     Fixed indent problems.
+
+commit 4c9d6183f3ec214c4e722f70e273bbcda5e2507b
+Author: gonserr <gonserr@mail.gvsu.edu>
+Date:   Fri Nov 29 15:54:36 2019 -0500
+
+    gitignore
 
 commit 63044f6eae5468f00204fbae5d264c11005deaa2
 Author: Philip Picard <emailmeforfreeipad@gmail.com>
